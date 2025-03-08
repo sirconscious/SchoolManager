@@ -24,27 +24,27 @@ class UserFactory extends Factory
     public function definition(): array
     {
         // For students
-        // return [
-        //     'name' => fake()->name(),
-        //     'email' => fake()->unique()->safeEmail(),
-        //     'email_verified_at' => now(),
-        //     'password' => static::$password ??= Hash::make('password'), 
-        //     'role' => 'student',
-        //     'group' => "DEV201" ,
-        //     "phone"=>fake()->phoneNumber() ,
-        //     'remember_token' => Str::random(10),
-        // ];
-        // For teachers
         return [
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'), 
-            'role' => 'teacher',
-            // 'group' => "DEV201" ,
+            'role' => 'student',
+            'group' => "DEV204" ,
             "phone"=>fake()->phoneNumber() ,
             'remember_token' => Str::random(10),
         ];
+        // For teachers
+        // return [
+        //     'name' => fake()->name(),
+        //     'email' => fake()->unique()->safeEmail(),
+        //     'email_verified_at' => now(),
+        //     'password' => static::$password ??= Hash::make('password'), 
+        //     'role' => 'teacher',
+        //     // 'group' => "DEV201" ,
+        //     "phone"=>fake()->phoneNumber() ,
+        //     'remember_token' => Str::random(10),
+        // ];
     }
 
     /**

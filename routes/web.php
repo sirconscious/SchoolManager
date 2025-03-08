@@ -37,4 +37,6 @@ Route::post('storeTeacher' , [AdminController::class , 'storeTeacher'])->name("a
 //route tot edit a teacher : 
 Route::get('editTeacher/{user}' , [AdminController::class , 'editTeacher'])->name("admin.editTeacher") ; 
 //route to update a teacher : 
-Route::post('updateTeacher/{user}' , [AdminController::class , 'updateTeacher'])->name("admin.updateTeacher") ;
+Route::post('updateTeacher/{user}' , [AdminController::class , 'updateTeacher'])->name("admin.updateTeacher") ; 
+//Graphs route : 
+Route::get('Graphs' , [AdminController::class , 'Graphs'])->name("admin.Graphs") ;

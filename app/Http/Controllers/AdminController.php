@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Groupe;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
@@ -108,5 +109,17 @@ class AdminController extends Controller
         ]);
         $user->update($validated) ;
         return redirect()->route('admin.teacherList')->with('success', 'Teacher updated successfully.');
+    } 
+    public function Graphs(){
+        if (auth()->user()->role != 'admin') {
+            redirect()->route("user.login.show") ;
+        } 
+        $result = DB::table('users as u')
+            ->join('groupes as g', 'u.group', '=', 'g.group_name')
+            ->select('g.group_name', DB::raw('count(*) as count'))
+            ->groupBy('g.group_name')
+            ->get();
+        // dd($result) ;
+        return view('Pages.Graphes' , compact('result')) ;
     }
 }
