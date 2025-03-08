@@ -1,0 +1,56 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\User;
+use Illuminate\Http\Request;
+
+class AdminController extends Controller
+{
+    public function storeStudent(Request $request){ 
+        if (auth()->user()->role != 'admin') {
+            redirect()->route("user.login.show") ;
+        }
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|confirmed|min:6',
+            'phone' => 'required',
+            'group' => 'required|string|max:255',
+        ]);
+        
+        $validated['password'] = bcrypt($validated['password']) ; 
+        $validated['role'] = 'student' ;
+        // dd($request->all() ) ;
+        User::create($validated) ;
+        return redirect()->route('admin.dashbored')->with('success', 'Student added successfully.');
+
+    }
+    public function updateStudent(Request $request , User $user){
+        if (auth()->user()->role != 'admin') {
+            redirect()->route("user.login.show") ;
+        }
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,'.$user->id,
+            'phone' => 'required',
+            'group' => 'required|string|max:255',
+        ]);
+        $user->update($validated) ;
+        return redirect()->route('admin.studentList')->with('success', 'Student updated successfully.');
+    }
+    public function studentList(){
+        if (auth()->user()->role != 'admin') {
+            redirect()->route("user.login.show") ;
+        }
+        $users = User::where('role' , 'student')->get() ;
+        return view('Pages.StudentList' , compact('users')) ;
+    }
+    public function editStudent(User $user){
+    if (auth()->user()->role != 'admin') {
+        redirect()->route("user.login.show") ;
+
+    } 
+    return view('Pages.EditStudent' , compact('user')) ;
+    }
+}
