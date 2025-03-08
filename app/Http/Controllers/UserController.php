@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Groupe;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -77,7 +78,7 @@ class UserController extends Controller
         
         if (Auth::attempt($values)) {
             $request->session()->regenerate();
-            return redirect()->route('admin.dashbored')->with('success', 'You are now logged in.');
+            return redirect()->route('admin.studentList')->with('success', 'You are now logged in.');
             // dd(auth()->user()->role); 
         }else{
             return back()->withErrors(['login_error' => 'Invalid email or password.']); 
@@ -92,10 +93,11 @@ class UserController extends Controller
 
     public function adminLayout(){
         if (Auth::user()->role == 'admin') {
-            return view('Pages.AddStudent');
+            $groupes = Groupe::all() ;
+            return view('Pages.AddStudent',compact('groupes') );
         }
         else {
-            return view('Pages.LoginForm');
+            return view('Pages.LoginForm' );
 
         }
 }
