@@ -12,7 +12,7 @@ class TodolistController extends Controller
      */
     public function index()
     {
-        //
+        // return view('Pages.Todolist' , compact('tasks')) ;
     }
 
     /**
@@ -28,7 +28,16 @@ class TodolistController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $task =  $request->input('task') ; 
+        $user_id = auth()->user()->id ;
+        $task = Todolist::create([
+            "body" => $task, 
+            "status"=> "pending" ,
+            "users_id" => $user_id
+        ]) ;
+        
+        return back()->with('success', 'Task added successfully');
+
     }
 
     /**
@@ -52,7 +61,11 @@ class TodolistController extends Controller
      */
     public function update(Request $request, Todolist $todolist)
     {
-        //
+        $Newstauts = $todolist->status == "pending" ? "completed" : "pending" ;
+        $todolist->update([
+            "status" => $Newstauts
+        ]) ;
+        return back();
     }
 
     /**
@@ -60,6 +73,7 @@ class TodolistController extends Controller
      */
     public function destroy(Todolist $todolist)
     {
-        //
+        $todolist->delete() ;
+        return back()->with('success', 'Task deleted successfully');
     }
 }

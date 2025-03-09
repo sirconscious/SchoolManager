@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\TodolistController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -39,4 +40,6 @@ Route::get('editTeacher/{user}' , [AdminController::class , 'editTeacher'])->nam
 //route to update a teacher : 
 Route::post('updateTeacher/{user}' , [AdminController::class , 'updateTeacher'])->name("admin.updateTeacher") ; 
 //Graphs route : 
-Route::get('Graphs' , [AdminController::class , 'Graphs'])->name("admin.Graphs") ;
+Route::get('Graphs' , [AdminController::class , 'Graphs'])->name("admin.Graphs") ; 
+//Todos routes : 
+Route::resource('todolist' , TodolistController::class) ; 

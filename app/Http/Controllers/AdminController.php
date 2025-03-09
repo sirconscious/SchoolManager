@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Groupe;
+use App\Models\Todolist;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -124,8 +125,13 @@ class AdminController extends Controller
             ->groupBy('created_date')
             ->orderBy('created_date', 'asc')
             ->get();
-            
+            $user_id = auth()->user()->id ;
+            $tasks = Todolist::where('users_id', $user_id)
+            ->orderBy('status', 'desc')
+            ->get();   
+            $studentsCount = User::where('role', 'student')->count();
+     
         // dd($result) ;
-        return view('Pages.Graphes' , compact('result' , 'users')) ;
+        return view('Pages.Graphes' , compact('result' , 'users' , 'tasks' , "studentsCount")) ;
     }
 }

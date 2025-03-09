@@ -4,8 +4,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.7.0/flowbite.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<div class="flex justify-center items-center h-screen mt-5"> 
-  <div class=" grid grid-cols-2  gap-32 ">
+<div class="flex justify-center items-center h-screen "> 
+  <div class=" grid grid-cols-3  gap-x-10 ">
       {{-- Pie chart --}}
     <div class="max-w-sm w-full h-fit bg-white rounded-lg shadow-sm dark:bg-gray-800 p-4 md:p-6">
 
@@ -66,7 +66,7 @@
 <div class="max-w-sm w-full bg-white rounded-lg shadow-sm dark:bg-gray-800 p-4 md:p-6">
   <div class="flex justify-between">
     <div>
-      <h5 class="leading-none text-3xl font-bold text-gray-900 dark:text-white pb-2">32.4k</h5>
+      <h5  id='total-users' class="leading-none text-3xl font-bold text-gray-900 dark:text-white pb-2"></h5>
       <p class="text-base font-normal text-gray-500 dark:text-gray-400">Users this week</p>
     </div>
     <div
@@ -80,7 +80,98 @@
   <div id="area-chart"></div>
 
 </div>
+ <div class="">
+        
+<form class="max-w-sm mx-auto" method="POST" action="{{route('todolist.store')}}"> 
+  @csrf
+  <label for="email-address-icon" class="block mb-2 text-lg font-medium text-gray-900 dark:text-white">Your Tasks</label>
+  <div class="relative">
+    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+      <i class="fa-solid fa-list-check"></i>
+      {{-- <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 16"> --}}
+        <path d="m10.036 8.278 9.258-7.79A1.979 1.979 0 0 0 18 0H2A1.987 1.987 0 0 0 .641.541l9.395 7.737Z"/>
+        <path d="M11.241 9.817c-.36.275-.801.425-1.255.427-.428 0-.845-.138-1.187-.395L0 2.6V14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2.5l-8.759 7.317Z"/>
+      </svg>
+    </div>
+    <div class="flex justify-center items-center gap-1">
+      <input type="text" id="email-address-icon" name="task" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="new task">
+      <button type="submit" class="text-white mt-2 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Add </button>
+    </div>
+  </form>
+  
+  </div>
+  <ul class="max-w-md space-y-1 text-gray-500 list-inside dark:text-gray-400">
+    @foreach ( $tasks as $task) 
+    @if ($task->status == 'pending')
+    <li class="flex items-center flex-row relative">
+      <form  class="flex items-center justify-center" action="{{route('todolist.update',$task)}}" method="POST">
+        @method("PUT")
+        @csrf
+        <button type="submit" class="hover:cursor-pointer">
+          <svg class="w-3.5 h-3.5 me-2 text-gray-500 dark:text-gray-400 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+         </svg>
+        </button>
+       
+      </form>
+       <p> {{$task->body}}
+      </p>  
+      <form action="{{route("todolist.destroy",$task)}}" method="POST">
+        @csrf
+        @method("DELETE")
+        <button class="hover:cursor-pointer">
+          <i class="fa-solid fa-trash text-red-600  absolute right-0"></i>
+        </button>
+      </form>
+ 
+  </li>
+    @else
+    <li class="flex items-center relative">
+      <form  class="flex items-center justify-center" action="{{route('todolist.update',$task)}}" method="POST">
+        @method("PUT")
+        @csrf
+        <button type="submit" class="hover:cursor-pointer">
+          <svg class="w-3.5 h-3.5 me-2 text-green-500 dark:text-green-400 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+         </svg>
+        </button>
+       
+      </form>
+       <p class="line-through decoration-green-500 decoration-2"> {{$task->body}}
+      </p>   
+      <form action="{{route("todolist.destroy",$task)}}" method="POST">
+        @csrf
+        @method("DELETE")
 
+
+        <button class="hover:cursor-pointer">
+          <i class="fa-solid fa-trash text-red-600  absolute right-0"></i>
+        </button>
+      </form>
+  </li>
+    @endif
+    
+    @endforeach
+   
+</ul>
+<div class="mt-5">
+<div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+  <i class="fa-solid fa-graduation-cap w-7 h-7 text-4xl text-gray-500"></i>
+  <a href="#">
+      <h5 class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white" >{{$studentsCount}} Active Student</h5>
+  </a>
+  <p class="mb-3 font-normal text-gray-500 dark:text-gray-400">Go to the link to view the students list as an admin. It's recommended to remain active:</p>
+  <a href="{{route('admin.studentList')}}" class="inline-flex font-medium items-center text-blue-600 hover:underline">
+      See student list
+      <svg class="w-3 h-3 ms-2.5 rtl:rotate-[270deg]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11v4.833A1.166 1.166 0 0 1 13.833 17H2.167A1.167 1.167 0 0 1 1 15.833V4.167A1.166 1.166 0 0 1 2.167 3h4.618m4.447-2H17v5.768M9.111 8.889l7.778-7.778"/>
+      </svg>
+  </a>
+</div>
+
+</div>
+      </div>
+      
     </div>
 
        <script>
@@ -244,7 +335,11 @@ const options = {
 if (document.getElementById("area-chart") && typeof ApexCharts !== 'undefined') {
   const chart = new ApexCharts(document.getElementById("area-chart"), options);
   chart.render();
-}
+} 
+  const totleUsers = usersData.reduce((total, item) => total + item.user_count, 0); 
+  console.log(totleUsers); 
+  document.getElementById("total-users").textContent = totleUsers ;
+  // document.getElementById('active-students').textContent = totleUsers + " Active Students";
        </script>
     
 </div>
