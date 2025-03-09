@@ -118,8 +118,14 @@ class AdminController extends Controller
             ->join('groupes as g', 'u.group', '=', 'g.group_name')
             ->select('g.group_name', DB::raw('count(*) as count'))
             ->groupBy('g.group_name')
+            ->get(); 
+            $users = DB::table('users')
+            ->selectRaw('COUNT(*) as user_count, DATE(created_at) as created_date')
+            ->groupBy('created_date')
+            ->orderBy('created_date', 'asc')
             ->get();
+            
         // dd($result) ;
-        return view('Pages.Graphes' , compact('result')) ;
+        return view('Pages.Graphes' , compact('result' , 'users')) ;
     }
 }
