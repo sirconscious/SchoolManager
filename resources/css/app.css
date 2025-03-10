@@ -1,3 +1,18 @@
 @import "tailwindcss";
 @source "../views";
 @plugin "daisyui";
+ 
+.pagination nav {
+    display: flex !important;
+    justify-content: center;
+    padding: 10px;
+}
+
+.pagination nav a, 
+.pagination nav span {
+    color: white !important;  /* Ensure text is visible */
+    background-color: #1E293B !important; /* Dark gray for visibility */
+    padding: 8px 12px;
+    border-radius: 4px;
+    margin: 2px;
+}

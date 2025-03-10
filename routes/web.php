@@ -46,4 +46,6 @@ Route::resource('todolist' , TodolistController::class) ;
 // route for emploie 
 Route::get('Emploie' , [AdminController::class , 'AddEmploie'])->name("admin.Emploie") ; 
 //route to store emploie 
-Route::post('StoreEmploie' , [AdminController::class , 'StoreEmpLoie'])->name("admin.StoreEmploie") ;
+Route::post('StoreEmploie' , [AdminController::class , 'StoreEmpLoie'])->name("admin.StoreEmploie") ; 
+//route for the annoncements 
+Route::get("Annoncements" , [AdminController::class , 'Annoncements'])->name("admin.Annoncements") ;

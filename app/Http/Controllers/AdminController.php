@@ -134,24 +134,53 @@ class AdminController extends Controller
         // dd($result) ;
         return view('Pages.Graphes' , compact('result' , 'users' , 'tasks' , "studentsCount")) ;
     }
-    public function AddEmploie(Groupe $groupe){
+    public function AddEmploie(Groupe $groupe)
+    {
         if (auth()->user()->role != 'admin') {
-            redirect()->route("user.login.show") ;
+            return redirect()->route("user.login.show");
         } 
-        $groupes = Groupe::all() ; 
-        // dd($groupes) ;
-        return view('Pages.AddEmploie' , compact('groupes')) ;
+    
+        $perPage = 1; // Number of items per page
+        $currentPage = request()->query('page', 1); // Get current page from URL
+        $groupes = Groupe::all();
+    
+        // Manually slice the array
+        $groupesListe = $groupes->slice(($currentPage - 1) * $perPage, $perPage);
+    
+        $totalPages = ceil($groupes->count() / $perPage); // Calculate total pages
+    
+        return view('Pages.AddEmploie', compact('groupes', 'groupesListe', 'currentPage', 'totalPages'));
     }
-    //to store or update emploie
-    public function StoreEmpLoie( Request $request ){
+    
+    public function StoreEmpLoie(Request $request)
+    {
+        // Check if the user is an admin
         if (auth()->user()->role != 'admin') {
-            redirect()->route("user.login.show") ;
-        } 
-        dd($request->all()) ;
+            return redirect()->route("user.login.show");
+        }
+        // dd($request) ;
+        // Validate request inputs
+        $formFields = $request->validate([
+            "groupe_name" => "required",
+            "dropzone-file" => "required"
+        ]);
+        // dd($formFields) ;
+        // Store the uploaded file
+            $formFields['emploie'] = $request->file("dropzone-file")->store("Emploies", 'public');
         
-        return back() ;
+        // dd($formFields) ;
+        // Update the groupe with the uploaded file path
+        Groupe::where('group_name', $formFields['groupe_name'])->update([
+            'emploie' => $formFields['emploie'],
+        ]);
+    
+        return back()->with('success', 'Emploie added successfully.');
     }
-    public function GetAllEmploie(){
-        //
+    
+    public function Annoncements(){
+        if (auth()->user()->role != 'admin') {
+            redirect()->route("user.login.show") ;
+        } 
+        return view('Pages.Annoncements') ;
     }
 }
