@@ -42,4 +42,8 @@ Route::post('updateTeacher/{user}' , [AdminController::class , 'updateTeacher'])
 //Graphs route : 
 Route::get('Graphs' , [AdminController::class , 'Graphs'])->name("admin.Graphs") ; 
 //Todos routes : 
-Route::resource('todolist' , TodolistController::class) ; 
+Route::resource('todolist' , TodolistController::class) ;  
+// route for emploie 
+Route::get('Emploie' , [AdminController::class , 'AddEmploie'])->name("admin.Emploie") ; 
+//route to store emploie 
+Route::post('StoreEmploie' , [AdminController::class , 'StoreEmpLoie'])->name("admin.StoreEmploie") ;

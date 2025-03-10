@@ -134,4 +134,24 @@ class AdminController extends Controller
         // dd($result) ;
         return view('Pages.Graphes' , compact('result' , 'users' , 'tasks' , "studentsCount")) ;
     }
+    public function AddEmploie(Groupe $groupe){
+        if (auth()->user()->role != 'admin') {
+            redirect()->route("user.login.show") ;
+        } 
+        $groupes = Groupe::all() ; 
+        // dd($groupes) ;
+        return view('Pages.AddEmploie' , compact('groupes')) ;
+    }
+    //to store or update emploie
+    public function StoreEmpLoie( Request $request ){
+        if (auth()->user()->role != 'admin') {
+            redirect()->route("user.login.show") ;
+        } 
+        dd($request->all()) ;
+        
+        return back() ;
+    }
+    public function GetAllEmploie(){
+        //
+    }
 }
