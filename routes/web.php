@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AnnoceController;
 use App\Http\Controllers\TodolistController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -48,4 +49,8 @@ Route::get('Emploie' , [AdminController::class , 'AddEmploie'])->name("admin.Emp
 //route to store emploie 
 Route::post('StoreEmploie' , [AdminController::class , 'StoreEmpLoie'])->name("admin.StoreEmploie") ; 
 //route for the annoncements 
-Route::get("Annoncements" , [AdminController::class , 'Annoncements'])->name("admin.Annoncements") ;
+Route::get("Annoncements" , [AdminController::class , 'Annoncements'])->name("admin.Annoncements") ;  
+//to add annoncements
+Route::get("AddAnnoncements" , [AnnoceController::class , 'create'])->name("anonnce.create") ;
+//to store annoncements
+Route::post("storeAnnoncements" , [AnnoceController::class , 'store'])->name("anonnce.store") ;

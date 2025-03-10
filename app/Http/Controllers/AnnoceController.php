@@ -20,7 +20,7 @@ class AnnoceController extends Controller
      */
     public function create()
     {
-        //
+        return view('Pages.AddAnoncment') ;
     }
 
     /**
@@ -28,7 +28,16 @@ class AnnoceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $formFields = $request->validate([
+            "title" => "required",
+            "body" => "required",
+            "image" => "required"
+        ]) ; 
+        $formFields['users_id'] = auth()->user()->id ; 
+        $formFields["image"] = $request->file("image")->store("Annoce", 'public');
+        Annoce::create($formFields) ;
+        return to_route('admin.Annoncements')->with('success', 'Annoce added successfully.');
+        // dd($formFields) ;	
     }
 
     /**

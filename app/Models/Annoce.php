@@ -11,6 +11,7 @@ class Annoce extends Model
     protected $fillable = [
         'title',
         'body',
+        "image",
         'users_id',
     ];
 }
