@@ -58,7 +58,9 @@ class ExamesController extends Controller
      */
     public function edit(Exames $exames)
     {
-        //
+        $teachers = User::where('role', 'teacher')->get(); 
+        $courses = Courses::all() ;
+        return view("Pages.Exames.EditExame" , compact("exames" , "teachers" , "courses")) ;
     }
 
     /**
@@ -66,7 +68,15 @@ class ExamesController extends Controller
      */
     public function update(Request $request, Exames $exames)
     {
-        //
+        $formFields = $request->validate([	
+            "name" => "required",  
+            "teachers_id" => "required",
+            "type"=>"required" ,
+            "courses_id" => "required",
+            "duree" => "required"
+        ]) ;
+        $exames->update($formFields) ;
+        return to_route('exame.index')->with('success', 'Exame updated successfully.');
     }
 
     /**

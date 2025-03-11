@@ -72,7 +72,7 @@
                   <td class=" py-4 text-right flex justify-evenly">
                     <form action="{{route("exame.destroy",$exame->id)}}" method="POST"> @csrf @method("DELETE")
                         <button type="submit" class="font-medium text-red-600 hover:underline" onclick="return confirm('Are you sure you want to delete the exame?')"  >Delete</button></form>
-                    {{-- <a href="{{route("course.edit",$course->id)}}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a> --}}
+                    <a href="{{route("exame.edit",$exame->id)}}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
                 </td> 
             </tr>
    

@@ -83,3 +83,7 @@ Route::get("createExame" , [ExamesController::class , "create"])->name("exame.cr
 Route::post("storeExame" , [ExamesController::class , "store"])->name("exame.store") ;
 //route to delete a exame
 Route::delete("deleteExame/{exames}" , [ExamesController::class , "destroy"])->name("exame.destroy") ;
+//route to edit a exame 
+Route::get("editExame/{exames}" , [ExamesController::class , "edit"])->name("exame.edit") ; 
+//route to update a exame
+Route::put("updateExame/{exames}" , [ExamesController::class , "update"])->name("exame.update") ;
