@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AnnoceController;
+use App\Http\Controllers\TeachersController;
 use App\Http\Controllers\TodolistController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -53,4 +54,12 @@ Route::get("Annoncements" , [AdminController::class , 'Annoncements'])->name("ad
 //to add annoncements
 Route::get("AddAnnoncements" , [AnnoceController::class , 'create'])->name("anonnce.create") ;
 //to store annoncements
-Route::post("storeAnnoncements" , [AnnoceController::class , 'store'])->name("anonnce.store") ;
+Route::post("storeAnnoncements" , [AnnoceController::class , 'store'])->name("anonnce.store") ; 
+//to delete annoncements 
+Route::delete("deleteAnnoncements/{annoce}" , [AnnoceController::class , 'destroy'])->name("anonnce.destroy") ;
+//to edit a annoncements 
+Route::get("editAnnoncements/{annoce}" , [AnnoceController::class , 'edit'])->name("anonnce.edit") ;
+//to update a annocement 
+Route::put("updateAnnoncements/{annoce}" , [AnnoceController::class , 'update'])->name("anonnce.update") ; 
+//Routes for exames for teachers 
+Route::get("examesListe" , [TeachersController::class , "ExamesListe"])->name("teacher.ExamesListe") ;

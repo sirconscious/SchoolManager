@@ -13,5 +13,8 @@ class Annoce extends Model
         'body',
         "image",
         'users_id',
-    ];
+    ]; 
+    public function user(){
+        return $this->belongsTo(User::class, 'users_id', 'id');
+    }
 }

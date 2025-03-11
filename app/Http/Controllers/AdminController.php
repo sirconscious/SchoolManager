@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Annoce;
 use App\Models\Groupe;
 use App\Models\Todolist;
 use App\Models\User;
@@ -179,8 +180,18 @@ class AdminController extends Controller
     
     public function Annoncements(){
         if (auth()->user()->role != 'admin') {
-            redirect()->route("user.login.show") ;
+            return redirect()->route("user.login.show");
         } 
-        return view('Pages.Annoncements') ;
+        
+        $perPage = 3; // Number of items per page
+        $currentPage = request()->query('page', 1); // Get current page from URL
+        $anoncments = Annoce::all();
+        
+        // Manually slice the array
+        $anoncmentsListe = $anoncments->slice(($currentPage - 1) * $perPage, $perPage);
+        
+        $totalPages = ceil($anoncments->count() / $perPage); // Calculate total pages
+        
+        return view('Pages.Annoncements', compact('anoncmentsListe', 'currentPage', 'totalPages'));
     }
 }

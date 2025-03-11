@@ -11,14 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('annoces', function (Blueprint $table) {
+        Schema::create('courses', function (Blueprint $table) {
             $table->id();
-            $table->string('title'); 
-            $table->string('body');
-            $table->string('image');
-            $table->unsignedBigInteger("users_id") ;
-            $table->foreign('users_id')->references('id')->on('users');
-            $table->softDeletes() ;
+            $table->string('name');
+            $table->string('description');
             $table->timestamps();
         });
     }
@@ -28,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('annoces');
+        Schema::dropIfExists('courses');
     }
 };

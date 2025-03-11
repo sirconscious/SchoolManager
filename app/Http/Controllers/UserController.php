@@ -78,8 +78,12 @@ class UserController extends Controller
         
         if (Auth::attempt($values)) {
             $request->session()->regenerate();
-            return redirect()->route('admin.Graphs')->with('success', 'You are now logged in.');
-            // dd(auth()->user()->role); 
+            if (auth()->user()->role == 'admin') {
+                return redirect()->route('admin.Graphs')->with('success', 'You are now logged in.');
+                
+            }elseif (auth()->user()->role == 'teacher') {
+                return redirect()->route('teacher.ExamesListe')->with('success', 'You are now logged in.');                
+            }
         }else{
             return back()->withErrors(['login_error' => 'Invalid email or password.']); 
             // dd(Auth::check()) ;

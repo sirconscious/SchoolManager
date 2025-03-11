@@ -53,7 +53,10 @@ class AnnoceController extends Controller
      */
     public function edit(Annoce $annoce)
     {
-        //
+        if (auth()->user()->role != 'admin') {
+            return redirect()->route("user.login.show") ;
+        }
+        return view("Pages.EditAnocment" , compact("annoce")) ;
     }
 
     /**
@@ -61,7 +64,16 @@ class AnnoceController extends Controller
      */
     public function update(Request $request, Annoce $annoce)
     {
-        //
+        $formFields = $request->validate([
+            "title" => "required",
+            "body" => "required",
+            
+        ]) ;
+        if ($request->hasFile("image")) {
+            $formFields["image"] = $request->file("image")->store("Annoce", 'public');
+        }
+        $annoce->update($formFields) ; 
+        return  redirect()->route('admin.Annoncements')->with('success', 'Annoce updated successfully.');
     }
 
     /**
@@ -69,6 +81,7 @@ class AnnoceController extends Controller
      */
     public function destroy(Annoce $annoce)
     {
-        //
+        $annoce->delete() ; 
+        return back()->with('success', 'Annoce deleted successfully.');
     }
 }
