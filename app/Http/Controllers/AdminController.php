@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Annoce;
+use App\Models\Courses;
 use App\Models\Groupe;
 use App\Models\Todolist;
 use App\Models\User;
@@ -193,5 +194,12 @@ class AdminController extends Controller
         $totalPages = ceil($anoncments->count() / $perPage); // Calculate total pages
         
         return view('Pages.Annoncements', compact('anoncmentsListe', 'currentPage', 'totalPages'));
+    }
+    public function CoursesListe(){
+        if (auth()->user()->role != 'admin') {
+            return redirect()->route("user.login.show");
+        } 
+        $courses = Courses::all() ;
+        return view("Pages.Courses.CoursesListe" , compact("courses")) ;
     }
 }

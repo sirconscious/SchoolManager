@@ -1,6 +1,6 @@
 @extends('Layouts.AdminLayout') 
 @section('content')
-<div class="flex justify-center items-center h-screen relative mt-2">
+<div class="flex justify-center items-center h-screen relative ">
     <div class="grid grid-cols-3 gap-4">
       
    @foreach ($anoncmentsListe as $anonce)
@@ -13,7 +13,7 @@
             <div class="flex flex-col ml-2">
     
                 <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">{{$anonce->user?->name}}</h5>
-                <span class="text-sm text-gray-500 dark:text-gray-400">{{$anonce->user?->email}}</span>
+                <span class="text-sm text-gray-500 dark:text-gray-400">{{ \Carbon\Carbon::parse($anonce->created_at)->format('d/m/Y') }}</span>
             </div>
            
         </div>

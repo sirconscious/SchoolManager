@@ -20,7 +20,7 @@ class CoursesController extends Controller
      */
     public function create()
     {
-        //
+        return view("Pages.Courses.AddCourse") ;
     }
 
     /**
@@ -28,7 +28,12 @@ class CoursesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $formFields = $request->validate([
+            "name" => "required",
+            "description" => "required",
+        ]) ; 
+        Courses::create($formFields) ;
+        return to_route('admin.CoursesListe')->with('success', 'Course added successfully.');
     }
 
     /**
@@ -44,7 +49,7 @@ class CoursesController extends Controller
      */
     public function edit(Courses $courses)
     {
-        //
+        return view("Pages.Courses.EditCourse" , compact("courses")) ;
     }
 
     /**
@@ -52,7 +57,12 @@ class CoursesController extends Controller
      */
     public function update(Request $request, Courses $courses)
     {
-        //
+        $formFields = $request->validate([
+            "name" => "required",
+            "description" => "required",
+        ]) ;
+        $courses->update($formFields) ;
+        return to_route('admin.CoursesListe')->with('success', 'Course updated successfully.');
     }
 
     /**
@@ -60,6 +70,7 @@ class CoursesController extends Controller
      */
     public function destroy(Courses $courses)
     {
-        //
+        $courses->delete(); 
+        return back()->with('success', 'Course deleted successfully.');
     }
 }

@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AnnoceController;
+use App\Http\Controllers\CoursesController;
+use App\Http\Controllers\ExamesController;
 use App\Http\Controllers\TeachersController;
 use App\Http\Controllers\TodolistController;
 use App\Http\Controllers\UserController;
@@ -61,5 +63,23 @@ Route::delete("deleteAnnoncements/{annoce}" , [AnnoceController::class , 'destro
 Route::get("editAnnoncements/{annoce}" , [AnnoceController::class , 'edit'])->name("anonnce.edit") ;
 //to update a annocement 
 Route::put("updateAnnoncements/{annoce}" , [AnnoceController::class , 'update'])->name("anonnce.update") ; 
-//Routes for exames for teachers 
-Route::get("examesListe" , [TeachersController::class , "ExamesListe"])->name("teacher.ExamesListe") ;
+//Routes for courser  
+Route::get("coursesListe" , [AdminController::class , "CoursesListe"])->name("admin.CoursesListe") ; 
+//Route to delete a course  
+Route::delete("deleteCourse/{courses}" , [CoursesController::class , "destroy"])->name("course.destroy") ;
+//Route to add a course 
+Route::get("addCourse" , [CoursesController::class , "create"])->name("course.create") ;
+//Route to store a course
+Route::post("storeCourse" , [CoursesController::class , "store"])->name("course.store") ;
+//Route to edit a course
+Route::get("editCourse/{courses}" , [CoursesController::class , "edit"])->name("course.edit") ;
+//Route to update a course
+Route::put("updateCourse/{courses}" , [CoursesController::class , "update"])->name("course.update") ;
+//route for the exames 
+Route::get("examesListe" , [ExamesController::class , "index"])->name("exame.index") ; 
+//route to create exame 
+Route::get("createExame" , [ExamesController::class , "create"])->name("exame.create") ;
+//route to store a exame
+Route::post("storeExame" , [ExamesController::class , "store"])->name("exame.store") ;
+//route to delete a exame
+Route::delete("deleteExame/{exames}" , [ExamesController::class , "destroy"])->name("exame.destroy") ;

@@ -1,6 +1,25 @@
 @extends('Layouts.AdminLayout') 
 @section('content')
-<div class="flex justify-center  items-start mt-15 h-screen"> 
+<div class="flex justify-center flex-col   items-start w-full h-screen"> 
+    <ul class="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400 mb-1 w-full">
+        <li class="me-2">
+            <a href="{{ route('admin.teacherList') }}" 
+               class="inline-block p-4 rounded-t-lg 
+               {{ request()->routeIs('admin.teacherList') ? 'text-blue-600 bg-gray-100 dark:bg-gray-800 dark:text-blue-500' : 'hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300' }}">
+                Teachers
+            </a>
+        </li>
+        
+        <li class="me-2">
+            <a href="{{ route('admin.addTeacher') }}" 
+               class="inline-block p-4 rounded-t-lg 
+               {{ request()->routeIs('admin.addTeacher') ? 'text-blue-600 bg-gray-100 dark:bg-gray-800 dark:text-blue-500' : 'hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300' }}">
+                Add Teacher
+            </a>
+        </li>
+    
+      
+    </ul>
     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
