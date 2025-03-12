@@ -4,10 +4,13 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AnnoceController;
 use App\Http\Controllers\CoursesController;
 use App\Http\Controllers\ExamesController;
+use App\Http\Controllers\ExamRecordsController;
 use App\Http\Controllers\TeachersController;
 use App\Http\Controllers\TodolistController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Models\User;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -86,4 +89,19 @@ Route::delete("deleteExame/{exames}" , [ExamesController::class , "destroy"])->n
 //route to edit a exame 
 Route::get("editExame/{exames}" , [ExamesController::class , "edit"])->name("exame.edit") ; 
 //route to update a exame
-Route::put("updateExame/{exames}" , [ExamesController::class , "update"])->name("exame.update") ;
+Route::put("updateExame/{exames}" , [ExamesController::class , "update"])->name("exame.update") ; 
+//teacher routes : 
+    //route to make an exame recored
+Route::get("addexameRecord" , [ExamRecordsController::class , 'create'])->name("record.create") ; 
+// route to get students based on groupe 
+
+Route::get('/get-students/{group}', function ($group) {
+    $students = User::where('role', 'student')->where('group', $group)->get();
+
+    return Response::json($students, 200, ['Access-Control-Allow-Origin' => '*']);
+});
+
+//route to store an exame recored
+Route::post("storeexameRecord" , [ExamRecordsController::class , 'store'])->name("record.store") ; 
+// route student_teacher liste 
+Route::get("studentTeacherListe" , [TeachersController::class , 'studentList'])->name("teacher.studentList") ;

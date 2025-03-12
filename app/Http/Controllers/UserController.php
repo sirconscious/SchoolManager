@@ -82,7 +82,7 @@ class UserController extends Controller
                 return redirect()->route('admin.Graphs')->with('success', 'You are now logged in.');
                 
             }elseif (auth()->user()->role == 'teacher') {
-                return redirect()->route('teacher.ExamesListe')->with('success', 'You are now logged in.');                
+                return redirect()->route('teacher.studentList')->with('success', 'You are now logged in.');                
             }
         }else{
             return back()->withErrors(['login_error' => 'Invalid email or password.']); 

@@ -1,6 +1,6 @@
 @extends('Layouts.AdminLayout') 
 @section('content')
-<div class="flex justify-center flex-col   items-start w-full h-screen"> 
+<div class="flex justify-center flex-col mt-12  items-start w-full h-screen"> 
     <ul class="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400 mb-1 w-full">
         <li class="me-2">
             <a href="{{ route('admin.teacherList') }}" 
