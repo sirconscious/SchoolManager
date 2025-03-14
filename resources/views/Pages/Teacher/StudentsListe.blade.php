@@ -33,13 +33,18 @@
                 </select>
             
             </div>
-            <label for="table-search" class="sr-only">Search</label>
-            <div class="relative">
-                <div class="absolute inset-y-0 left-0 rtl:inset-r-0 rtl:right-0 flex items-center ps-3 pointer-events-none">
-                    <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
-                </div>
-                <input type="text" id="table-search" class="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search for items">
-            </div>
+          
+    <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+    <div class="relative w-1/4">
+        <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+            </svg>
+        </div>
+        <input type="search"  id="name_search" class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search Mockups, Logos..." required />
+        <button type="submit" id="search" class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
+    </div>
+
         </div>
 
       <div class="relative overflow-x-auto shadow-md sm:rounded-lg  w-[1200px] h-[500px] overflow-y-auto">
@@ -59,7 +64,7 @@
                 <th scope="col" class="px-6 py-3">
                     Group
                 </th>
-                <th scope="col" class="px-6 py-3">
+                <th scope="col" class="px-6 py-3 text-center">
                     Action
                 </th>
             </tr>
@@ -78,26 +83,12 @@
                 </td>
                 <td class="px-6 py-4">
                     {{ $student->group }}
+
                 </td>
-                <td class="px-6 py-4">
-                    <div >
-                        <button id="dropdownMenuIconButton" data-dropdown-toggle="dropdownDots" class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-600" type="button">
-                            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 4 15">
-                            <path d="M3.5 1.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 6.041a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 5.959a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"/>
-                            </svg>
-                            </button>
-                        <div id="dropdownDots" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700 dark:divide-gray-600">
-                            <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownMenuIcon">
-                              <li>
-                                <a href="" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white   border-b-1  border-blue-950">Add record</a>
-                              </li>
-                              <li>
-                                <a href="" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 w-full text-start dark:hover:text-white">View records</a>
-                              </li>
-                           
-                            </ul>
-                          
-                        </div>
+                <td class="px-6 py-4 flex flex-row">
+                    <a href="{{route('record.show' , $student->id)}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 w-full text-start dark:hover:text-white">View records</a>
+                    <a  href="{{route("record.createS" , $student)}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 w-full text-start dark:hover:text-white">Add record</a>
+
                     </div>
             
                 </td>
@@ -142,10 +133,10 @@ tr.innerHTML = `
         <div class="dropdown-menu z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700 dark:divide-gray-600 absolute right-0 mt-2">
             <ul class="py-2 text-sm text-gray-700 dark:text-gray-200">
                 <li>
-                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white border-b border-blue-950">Add record</a>
+                    <a href="/studentRecored/${data[std].id}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 w-full text-start dark:hover:text-white">View records</a>
                 </li>
                 <li>
-                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 w-full text-start dark:hover:text-white">View records</a>
+                    <a href="/addexameRecordF/${data[std].id}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 w-full text-start dark:hover:text-white">Add record</a>
                 </li>
             </ul>
         </div>
@@ -172,6 +163,70 @@ document.addEventListener('click', (e) => {
                 studetns.appendChild(option);
             }
         })
-    })
+    }) 
+const search_bar = document.getElementById("name_search") ; 
+const search = document.getElementById("search") ;
+search.addEventListener('click' , function(){ 
+    console.log(search_bar.value);
+    fetch(`http://localhost:8000/get-studentByName/${search_bar.value}`) 
+    .then(res => res.json()) 
+    .then(data => {
+        // console.log(data[5].group);
+        studetns.innerHTML = '';
+        for (let std in data ){
+            let option = document.createElement('option');
+            let tr = document.createElement('tr');
+                tr.classList.add('bg-white', 'border-b', 'dark:bg-gray-800', 'dark:border-gray-700', 'hover:bg-gray-50', 'dark:hover:bg-gray-600');
+tr.innerHTML = `
+    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+        ${data[std].name}
+        </th>
+        <td class="px-6 py-4">${data[std].email}</td>
+        <td class="px-6 py-4">${data[std].phone}</td>
+        <td class="px-6 py-4">${data[std].group}</td>
+        <td class="px-6 py-4 relative">
+            <button class="dropdown-btn inline-flex items-center p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-600" type="button">
+                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 4 15">
+                    <path d="M3.5 1.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 6.041a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 5.959a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"/>
+                    </svg>
+                    </button>
+                    <div class="dropdown-menu z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700 dark:divide-gray-600 absolute right-0 mt-2">
+                                  <ul class="py-2 text-sm text-gray-700 dark:text-gray-200">
+                <li>
+                    <a href="/studentRecored/${data[std].id}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 w-full text-start dark:hover:text-white">View records</a>
+                </li>
+                <li>
+                    <a href="/addexameRecordF/${data[std].id}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 w-full text-start dark:hover:text-white">Add record</a>
+                </li>
+            </ul>
+
+                        </div>
+                        </td>
+                        `;
+
+                        students.appendChild(tr);
+
+                        // Attach click event to toggle dropdown
+                        const dropdownBtn = tr.querySelector('.dropdown-btn');
+                        const dropdownMenu = tr.querySelector('.dropdown-menu');
+                        
+                        dropdownBtn.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            dropdownMenu.classList.toggle('hidden');
+                        });
+                        
+                        // Close dropdown if clicking outside
+                        document.addEventListener('click', (e) => {
+                            if (!dropdownBtn.contains(e.target) && !dropdownMenu.contains(e.target)) {
+        dropdownMenu.classList.add('hidden');
+    }
+});
+                studetns.appendChild(option);
+            }
+        })
+    }) 
+    .catch(error => console.log(error))
+
+    
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>

@@ -12,7 +12,16 @@ class AnnoceController extends Controller
      */
     public function index()
     {
-        //
+        $perPage = 3; // Number of items per page
+        $currentPage = request()->query('page', 1); // Get current page from URL
+        $anoncments = Annoce::all();
+        
+        // Manually slice the array
+        $anoncmentsListe = $anoncments->slice(($currentPage - 1) * $perPage, $perPage);
+        
+        $totalPages = ceil($anoncments->count() / $perPage); // Calculate total pages
+        
+        return view('Pages.Teacher.Annoncements', compact('anoncmentsListe', 'currentPage', 'totalPages'));
     }
 
     /**

@@ -27,7 +27,11 @@ class ExamRecordsController extends Controller
         $exames = Exames::all() ;
         return view("Pages.Teacher.MakeExameRecored" , compact("groupes" , "exames")) ;
     }
-
+    public function createForStudent(Request $request , User $user){
+        $exames = Exames::all() ;
+        $student = $user ;
+        return view("Pages.Teacher.MakeExameRecoredForStudent" , compact("student" , "exames")) ;
+    }
     /**
      * Store a newly created resource in storage.
      */
@@ -46,10 +50,15 @@ class ExamRecordsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(exam_records $exam_records)
-    {
-        //
-    }
+    public function show(User $user)
+    { 
+
+        $recordes = exam_records::where('users_id' , $user->id)->get();
+        if ($recordes->isempty()) {
+            return back()->with('error', 'No records found for this student.');
+        }
+        return view("Pages.Teacher.StduentsRecored" , compact('recordes'));
+     }
 
     /**
      * Show the form for editing the specified resource.

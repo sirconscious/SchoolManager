@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AnnoceController;
 use App\Http\Controllers\CoursesController;
+use App\Http\Controllers\EmploieController;
 use App\Http\Controllers\ExamesController;
 use App\Http\Controllers\ExamRecordsController;
 use App\Http\Controllers\TeachersController;
@@ -101,7 +102,19 @@ Route::get('/get-students/{group}', function ($group) {
     return Response::json($students, 200, ['Access-Control-Allow-Origin' => '*']);
 });
 
+Route::get('/get-studentByName/{name}' , function($name){
+    $stundets= User::where('name' , 'like' , "%$name%")->where('role' , 'student')->get() ;
+    return Response::json($stundets , 200 , ['Access-Control-Allow-Origin' => '*']) ; 
+}) ;
 //route to store an exame recored
 Route::post("storeexameRecord" , [ExamRecordsController::class , 'store'])->name("record.store") ; 
 // route student_teacher liste 
-Route::get("studentTeacherListe" , [TeachersController::class , 'studentList'])->name("teacher.studentList") ;
+Route::get("studentTeacherListe" , [TeachersController::class , 'studentList'])->name("teacher.studentList") ; 
+//route to make an exame recored for a student 
+Route::get("addexameRecordF/{user}" , [ExamRecordsController::class , 'createForStudent'])->name("record.createS") ; 
+//route to view student recored ; 
+Route::get("studentRecored/{user}" , [ExamRecordsController::class , 'show'])->name("record.show") ;
+//route to get the emploie 
+Route::get("Teacheremploie" , [EmploieController::class , 'index'])->name("teacher.emploie") ;
+//route to get Annonce 
+Route::get("TeacherAnnonce" , [AnnoceController::class , 'index'])->name("teacher.anonnce") ;
