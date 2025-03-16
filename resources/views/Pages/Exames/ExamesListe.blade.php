@@ -1,9 +1,9 @@
 @extends('Layouts.AdminLayout') 
 @section('content')
-<div class="flex justify-end w-full items-start mt-15 h-screen relative"> 
+<div class="flex justify-end w-full items-start mt-15  relative "> 
     
 
-<div class="relative overflow-x-auto min-w-[1250px]">
+<div class=" overflow-x-auto min-w-[1250px]">
     
 
     <ul class="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400 mb-1">
@@ -83,9 +83,13 @@
     
 </div>
 
-<a href="{{route("exame.create")}}">
-    <div class="px-4 py-4 absolute bottom-17 right-5 cursor-pointer rounded-full bg-gradient-to-r from-blue-500 to-green-500 shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out">
-        <i class="fa-solid fa-plus text-2xl text-white"></i>
-    </div>
-</a>
-</div>
+</div> 
+
+
+</div >
+
+    <a href="{{route("exame.create")}}" class="fixed bottom-10 right-5">
+        <div class="px-4 py-4  cursor-pointer rounded-full bg-gradient-to-r from-blue-500 to-green-500 shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out">
+            <i class="fa-solid fa-plus text-2xl text-white"></i>
+        </div>
+    </a>

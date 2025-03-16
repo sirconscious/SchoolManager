@@ -2,10 +2,12 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AnnoceController;
+use App\Http\Controllers\CoefController;
 use App\Http\Controllers\CoursesController;
 use App\Http\Controllers\EmploieController;
 use App\Http\Controllers\ExamesController;
 use App\Http\Controllers\ExamRecordsController;
+use App\Http\Controllers\StudentsController;
 use App\Http\Controllers\TeachersController;
 use App\Http\Controllers\TodolistController;
 use App\Http\Controllers\UserController;
@@ -118,3 +120,7 @@ Route::get("studentRecored/{user}" , [ExamRecordsController::class , 'show'])->n
 Route::get("Teacheremploie" , [EmploieController::class , 'index'])->name("teacher.emploie") ;
 //route to get Annonce 
 Route::get("TeacherAnnonce" , [AnnoceController::class , 'index'])->name("teacher.anonnce") ;
+//Student route 
+Route::get("Main" , [StudentsController::class , 'index'])->name("student.main") ;
+//route to get records stats  
+Route::get("recordsStats/{id}" , [CoefController::class , 'index'])->name("student.recordsStats") ;
