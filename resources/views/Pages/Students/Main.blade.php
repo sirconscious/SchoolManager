@@ -48,7 +48,7 @@
         <!-- Second Column -->
         <div class="w-full">
             <!-- Title for the section -->
-            <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">Moyenne per module</h2>
+            <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">Moyenne par module</h2>
         
             <!-- Grid for notes -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-2" id="notes">
@@ -88,9 +88,10 @@ let pre = [18.2, 16, 12, 16];
     let total = pre.reduce((sum, num) => sum + num, 0);
     let percentages = pre.map(num => (num / total) * 100).map(num => Number(num.toFixed(0)));
     console.log("per", percentages); 
-
+  let idUser = {{auth()->user()->id}}
+  
 const getData = async() =>{
-    const responce =  await fetch('/recordsStats/115')
+    const responce =  await fetch('/recordsStats/${idUser}')
     const data = await responce.json()
     let  info = data.map((ob) => ob.weighted_avg_note);
      let total = info.reduce((sum, num) => sum + num, 0);
@@ -111,7 +112,7 @@ const getData = async() =>{
 } 
 
 const getNames = async() =>{
-    const responce =  await fetch('/recordsStats/115')
+    const responce =  await fetch('/recordsStats/${idUser}')
     const data = await responce.json()
     let  info = data.map((ob) => ob.name);
     console.log(info);
@@ -119,7 +120,7 @@ const getNames = async() =>{
 } 
 const Maxes = async () => {
     try {
-        const response = await fetch('/recordsStats/115'); // Fetch data from the API
+        const response = await  fetch('/recordsStats/${idUser}') // Fetch data from the API
         const data = await response.json(); // Parse the JSON response
         const notes = document.getElementById("notes"); // Get the notes container
         

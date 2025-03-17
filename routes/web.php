@@ -124,3 +124,9 @@ Route::get("TeacherAnnonce" , [AnnoceController::class , 'index'])->name("teache
 Route::get("Main" , [StudentsController::class , 'index'])->name("student.main") ;
 //route to get records stats  
 Route::get("recordsStats/{id}" , [CoefController::class , 'index'])->name("student.recordsStats") ;
+
+Route::get("MyRecoreds" , [StudentsController::class , 'Myrecoreds'])->name("student.MyRecoreds") ; 
+//route to get emploie for student based on groupe 
+Route::get('emploieS' , [StudentsController::class , 'emploie'])->name("student.emploie") ;
+//route to get Annonce for studen 
+Route::get('AnnonceS' , [StudentsController::class , 'Annocements'])->name("student.Annonce") ;
