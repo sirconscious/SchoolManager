@@ -84,7 +84,7 @@
         
 <form class="max-w-sm mx-auto" method="POST" action="{{route('todolist.store')}}"> 
   @csrf
-  <label for="email-address-icon" class="block mb-2 text-lg font-medium text-gray-900 dark:text-white">Your Tasks</label>
+  <label for="email-address-icon" class="block mb-2 text-lg font-medium text-gray-900 dark:text-white">Todo Liste</label>
   <div class="relative">
     <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
       <i class="fa-solid fa-list-check"></i>

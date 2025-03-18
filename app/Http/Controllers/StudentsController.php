@@ -13,8 +13,12 @@ class StudentsController extends Controller
    
 
     public function index(){ 
-
-        return  view("Pages.Students.Main"  ) ;
+        $recordes = exam_records::where('users_id' , auth()->user()->id)
+                                ->orderBy('created_at', 'desc')
+                                ->limit(4)
+                                ->get();
+        // dd($recordes) ;                      
+        return  view("Pages.Students.Main" , compact('recordes') ) ;
     }
     public function Myrecoreds (){
         $recordes = exam_records::where('users_id' , auth()->user()->id)->get(); 

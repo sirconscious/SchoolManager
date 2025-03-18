@@ -41,17 +41,46 @@
                     </div>
                 </div>
                 <p id="loading-message">Loading ...</p>
-                <div class="py-6" id="donut-chart"></div>
+                <div class="py-6 text-white" id="donut-chart"></div>
             </div>
         </div>
 
         <!-- Second Column -->
         <div class="w-full">
             <!-- Title for the section -->
-            <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">Moyenne par module</h2>
-        
+            {{-- <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">Moyenne par module</h2> --}}
+            <div class="relative overflow-x-auto ">
+              <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                  <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                      <tr>
+                          <th scope="col" class="px-6 py-3">
+                              Exame
+                          </th>
+                          <th scope="col" class="px-6 py-3">
+                              Note
+                          </th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                    @foreach ($recordes as $recored)
+                    <tr class="bg-white dark:bg-gray-800">
+                      <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        {{$recored->exames->name}}
+                      </th>
+                    
+                      <td class="px-6 py-4">
+                        {{$recored->note}}
+                      </td>
+                    
+                  </tr>
+                    @endforeach
+                    
+                  </tbody>
+              </table>
+            </div>
+            
             <!-- Grid for notes -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-2" id="notes">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-2 mt-2" id="notes">
                 <figure class="flex flex-col items-center justify-center p-4 text-center bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 w-full max-w-xs mx-auto">
                     <blockquote class="max-w-xs mx-auto mb-2 text-gray-500 dark:text-gray-400">
                         <h3 class="text-base font-semibold text-gray-900 dark:text-white">here goes the note</h3>
@@ -76,6 +105,11 @@
                         <p class="my-2 text-sm">You have many examples that can be used to create a fast prototype for your team."</p>
                     </blockquote>
                 </figure>
+            </div>
+            <div class="">
+              
+
+
             </div>
         </div>
         
@@ -173,6 +207,8 @@ const getChartOptions =async () => {
       height: 320,
       width: "100%",
       type: "donut",
+      foreColor: "#FFFFFF", // Set default text color to white
+
     },
     stroke: {
       colors: ["transparent"],
@@ -193,6 +229,7 @@ const getChartOptions =async () => {
               show: true,
               label: "",
               fontFamily: "Inter, sans-serif",
+              color: "#FFFFFF", // Ensure total label is white
               formatter: function (w) {
                 const sum = w.globals.seriesTotals.reduce((a, b) => {
                   return a + b
@@ -203,6 +240,7 @@ const getChartOptions =async () => {
             value: {
               show: true,
               fontFamily: "Inter, sans-serif",
+              color: "#FFFFFF", // Ensure value labels are white
               offsetY: -20,
               formatter: function (value) {
                 return value + "k"
@@ -236,7 +274,10 @@ const getChartOptions =async () => {
     xaxis: {
       labels: {
         formatter: function (value) {
-          return value  + "k"
+          return value + "k";
+        },
+        style: {
+          colors: "#FFFFFF", // Ensure x-axis labels are white
         },
       },
       axisTicks: {
