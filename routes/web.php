@@ -42,7 +42,7 @@ Route::middleware('auth')->group(function () {
     // Admin routes
     Route::get('adminDashbored', [UserController::class, 'adminLayout'])->name("admin.dashbored");
     Route::post("addStudent", [AdminController::class, 'storeStudent'])->name("admin.addStudent");
-    Route::get('studentList', [AdminController::class, 'studentList'])->name("admin.studentList");
+    Route::get('studentList', [AdminController::class, 'studentList'])->name("admin.studentList")->middleware('isAdmin');
     Route::get('editStudent/{user}', [AdminController::class, 'editStudent'])->name("admin.editStudent");
     Route::post('updateStudent/{user}', [AdminController::class, 'updateStudent'])->name("admin.updateStudent");
 
@@ -90,7 +90,7 @@ Route::middleware('auth')->group(function () {
     // Exam records routes
     Route::get("addexameRecord", [ExamRecordsController::class, 'create'])->name("record.create");
     Route::post("storeexameRecord", [ExamRecordsController::class, 'store'])->name("record.store");
-    Route::get("studentTeacherListe", [TeachersController::class, 'studentList'])->name("teacher.studentList");
+    Route::get("studentTeacherListe", [TeachersController::class, 'studentList'])->name("teacher.studentList")->middleware('isTeacher');
     Route::get("addexameRecordF/{user}", [ExamRecordsController::class, 'createForStudent'])->name("record.createS");
     Route::get("studentRecored/{user}", [ExamRecordsController::class, 'show'])->name("record.show");
 
@@ -99,7 +99,7 @@ Route::middleware('auth')->group(function () {
     Route::get("TeacherAnnonce", [AnnoceController::class, 'index'])->name("teacher.anonnce");
 
     // Student routes
-    Route::get("Main", [StudentsController::class, 'index'])->name("student.main");
+    Route::get("Main", [StudentsController::class, 'index'])->name("student.main")->middleware('isStudent') ;
     Route::get("recordsStats/{id}", [CoefController::class, 'index'])->name("student.recordsStats");
     Route::get("MyRecoreds", [StudentsController::class, 'Myrecoreds'])->name("student.MyRecoreds");
     Route::get('emploieS', [StudentsController::class, 'emploie'])->name("student.emploie");
