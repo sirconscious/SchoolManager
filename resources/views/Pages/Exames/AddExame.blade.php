@@ -1,4 +1,4 @@
-@extends('Layouts.AdminLayout')
+@extends('Layouts.TeacherLayout')
 @section('content')
 <div class="flex justify-center items-center h-screen ">
     
