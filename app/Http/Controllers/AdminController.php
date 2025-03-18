@@ -48,8 +48,9 @@ class AdminController extends Controller
         if (auth()->user()->role != 'admin') {
             redirect()->route("user.login.show") ;
         }
+        $groupes = Groupe::all() ;
         $users = User::where('role' , 'student')->get() ;
-        return view('Pages.StudentList' , compact('users')) ;
+        return view('Pages.StudentList' , compact('users' ,"groupes"));
     }
     public function editStudent(User $user){
     if (auth()->user()->role != 'admin') {
@@ -196,9 +197,9 @@ class AdminController extends Controller
         return view('Pages.Annoncements', compact('anoncmentsListe', 'currentPage', 'totalPages'));
     }
     public function CoursesListe(){
-        if (auth()->user()->role != 'admin') {
-            return redirect()->route("user.login.show");
-        } 
+        // if (auth()->user()->role != 'admin' || auth()->user()->role != 'teacher') {
+        //     return redirect()->route("user.login.show");
+        // } 
         $courses = Courses::all() ;
         return view("Pages.Courses.CoursesListe" , compact("courses")) ;
     }

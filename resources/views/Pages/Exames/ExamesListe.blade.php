@@ -1,4 +1,4 @@
-@extends('Layouts.AdminLayout') 
+@extends('Layouts.TeacherLayout') 
 @section('content')
 <div class="flex justify-end w-full items-start mt-15  relative "> 
     

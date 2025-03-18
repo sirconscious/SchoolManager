@@ -3,7 +3,7 @@
 @section('content')
     <div class="flex justify-center items-center h-screen relative">
         <div class="absolute top-20 left-64 ml-2 mt-1 w-[80%]">
-            <ul class="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400  mb-1">
+            {{-- <ul class="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400  mb-1">
                 <li class="me-2">
                     <a href="{{ route('admin.studentList') }}" 
                        class="inline-block p-4 rounded-t-lg 
@@ -20,7 +20,7 @@
                     </a>
                 </li>
             
-            </ul>
+            </ul> --}}
         </div>
     
 <form class="max-w-md mx-auto" method="POST" action="{{route('admin.addStudent')}}">
