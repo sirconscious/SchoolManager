@@ -72,10 +72,12 @@
     
     
 </div>
+@if (auth()->user()->role == "teacher")
 
 <a href="{{route("course.create")}}">
     <div class="px-4 py-4 absolute bottom-17 right-5 cursor-pointer rounded-full bg-gradient-to-r from-blue-500 to-green-500 shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out">
         <i class="fa-solid fa-plus text-2xl text-white"></i>
     </div>
 </a>
+@endif
 </div>

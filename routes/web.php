@@ -67,15 +67,20 @@ Route::middleware('auth')->group(function () {
     });
 
     // Teacher routes (grouped under 'teacher' middleware)
-    Route::middleware('teacher')->group(function () {
+    Route::middleware('canViewCoursAndExames')->group(function () {        
         Route::get("coursesListe", [AdminController::class, "CoursesListe"])->name("admin.CoursesListe");
+        Route::get("examesListe", [ExamesController::class, "index"])->name("exame.index");
+    });
+
+
+    Route::middleware('teacher')->group(function () {
+       
         Route::delete("deleteCourse/{courses}", [CoursesController::class, "destroy"])->name("course.destroy");
         Route::get("addCourse", [CoursesController::class, "create"])->name("course.create");
         Route::post("storeCourse", [CoursesController::class, "store"])->name("course.store");
         Route::get("editCourse/{courses}", [CoursesController::class, "edit"])->name("course.edit");
         Route::put("updateCourse/{courses}", [CoursesController::class, "update"])->name("course.update");
 
-        Route::get("examesListe", [ExamesController::class, "index"])->name("exame.index");
         Route::get("createExame", [ExamesController::class, "create"])->name("exame.create");
         Route::post("storeExame", [ExamesController::class, "store"])->name("exame.store");
         Route::delete("deleteExame/{exames}", [ExamesController::class, "destroy"])->name("exame.destroy");

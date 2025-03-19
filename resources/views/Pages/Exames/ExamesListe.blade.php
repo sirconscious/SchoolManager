@@ -87,9 +87,11 @@
 
 
 </div >
-
+    @if (auth()->user()->role == "teacher")
+        
     <a href="{{route("exame.create")}}" class="fixed bottom-10 right-5">
         <div class="px-4 py-4  cursor-pointer rounded-full bg-gradient-to-r from-blue-500 to-green-500 shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out">
             <i class="fa-solid fa-plus text-2xl text-white"></i>
         </div>
     </a>
+    @endif

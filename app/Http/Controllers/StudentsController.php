@@ -17,7 +17,6 @@ class StudentsController extends Controller
                                 ->orderBy('created_at', 'desc')
                                 ->limit(4)
                                 ->get();
-        // dd($recordes) ;                      
         return  view("Pages.Students.Main" , compact('recordes') ) ;
     }
     public function Myrecoreds (){
