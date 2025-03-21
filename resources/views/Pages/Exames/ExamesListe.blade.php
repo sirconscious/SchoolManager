@@ -4,7 +4,15 @@
     
 
 <div class=" overflow-x-auto min-w-[1250px]">
-    
+    <div class="felx justify-between flex-row  absolute top-0 right-0 mt-2">
+        <div class="flex justify-end">
+        @if (auth()->user()->role == "teacher")
+        <a href="{{route("exame.create")}}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+         <i class="fa-solid fa-plus"></i> Add Exame
+     </a>
+        @endif
+        </div>
+    </div> 
 
     <ul class="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400 mb-1">
         <li class="me-2">
@@ -87,11 +95,11 @@
 
 
 </div >
-    @if (auth()->user()->role == "teacher")
+    {{-- @if (auth()->user()->role == "teacher")
         
     <a href="{{route("exame.create")}}" class="fixed bottom-10 right-5">
         <div class="px-4 py-4  cursor-pointer rounded-full bg-gradient-to-r from-blue-500 to-green-500 shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out">
             <i class="fa-solid fa-plus text-2xl text-white"></i>
         </div>
     </a>
-    @endif
+    @endif --}}

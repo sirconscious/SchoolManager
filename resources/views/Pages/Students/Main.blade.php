@@ -115,7 +115,9 @@
         
     </div>
     
-</div><script>
+</div>
+
+<script>
 
 
 let pre = [18.2, 16, 12, 16];

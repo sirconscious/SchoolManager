@@ -15,7 +15,15 @@
 <div class="flex justify-end w-full items-start mt-15 h-screen relative"> 
     
 <div class="relative overflow-x-auto min-w-[1250px]">
-    <h1 class="text-3xl p-4">Courses Liste: </h1>
+   <div class="felx justify-between flex-row  absolute top-0 right-0 mt-2">
+       <div class="flex justify-end">
+       @if (auth()->user()->role == "teacher")
+       <a href="{{route("course.create")}}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+        <i class="fa-solid fa-plus"></i> Add Course
+    </a>
+       @endif
+       </div>
+   </div>
     {{-- @dd(auth()->user()->role); --}}
     @if (auth()->user()->role  !== "student")
         
@@ -124,12 +132,5 @@
     
     
 </div>
-@if (auth()->user()->role == "teacher")
 
-<a href="{{route("course.create")}}">
-    <div class="px-4 py-4 absolute bottom-17 right-5 cursor-pointer rounded-full bg-gradient-to-r from-blue-500 to-green-500 shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out">
-        <i class="fa-solid fa-plus text-2xl text-white"></i>
-    </div>
-</a>
-@endif
 </div>
