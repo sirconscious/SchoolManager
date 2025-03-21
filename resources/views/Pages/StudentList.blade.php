@@ -93,5 +93,71 @@
             });
         });
     });
+    
 </script>
+<script>
+    let groupes = document.getElementById('groupes');
+    let students = document.getElementById('students');
+    
+    groupes.addEventListener('change', function () {
+        if (this.value == "all") {
+            window.location.reload();
+        
+        }
+        fetch(`http://localhost:8000/get-students/${this.value}`)
+            .then(res => res.json())
+            .then(data => {
+                students.innerHTML = '';
+                data.forEach(student => {
+                    let tr = document.createElement('tr');
+                    tr.classList.add('bg-white', 'border-b', 'dark:bg-gray-800', 'dark:border-gray-700', 'hover:bg-gray-50', 'dark:hover:bg-gray-600');
+    
+                    let nameCell = document.createElement('th');
+                    nameCell.scope = 'row';
+                    nameCell.className = 'px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white';
+                    nameCell.textContent = student.name;
+                    tr.appendChild(nameCell);
+    
+                    let emailCell = document.createElement('td');
+                    emailCell.className = 'px-6 py-4';
+                    emailCell.textContent = student.email;
+                    tr.appendChild(emailCell);
+    
+                    let phoneCell = document.createElement('td');
+                    phoneCell.className = 'px-6 py-4';
+                    phoneCell.textContent = student.phone;
+                    tr.appendChild(phoneCell);
+    
+                    let groupCell = document.createElement('td');
+                    groupCell.className = 'px-6 py-4';
+                    groupCell.textContent = student.group;
+                    tr.appendChild(groupCell);
+    
+                    let actionsCell = document.createElement('td');
+                    actionsCell.className = 'py-4 text-right flex justify-evenly';
+    
+                    let deleteForm = document.createElement('form');
+                    deleteForm.action = `/user/${student.id}`;
+                    deleteForm.method = 'POST';
+                    deleteForm.innerHTML = `
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="font-medium text-red-600 hover:underline" onclick="return confirm('Are you sure you want to delete the student?')">Delete</button>
+                    `;
+                    actionsCell.appendChild(deleteForm);
+    
+                    let editLink = document.createElement('a');
+                    editLink.href = `/admin/editStudent/${student.id}`;
+                    editLink.className = 'font-medium text-blue-600 dark:text-blue-500 hover:underline';
+                    editLink.textContent = 'Edit';
+                    actionsCell.appendChild(editLink);
+    
+                    tr.appendChild(actionsCell);
+                    students.appendChild(tr);
+                });
+            })
+            .catch(err => console.log(err));
+    });
+</script>
+
 @endsection
