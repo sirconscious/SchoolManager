@@ -1,71 +1,85 @@
 @extends('Layouts.AdminLayout') 
 @section('content')
-<div class="flex justify-center flex-col mt-12  items-start w-full h-screen"> 
-    {{-- <ul class="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400 mb-1 w-full">
-        <li class="me-2">
-            <a href="{{ route('admin.teacherList') }}" 
-               class="inline-block p-4 rounded-t-lg 
-               {{ request()->routeIs('admin.teacherList') ? 'text-blue-600 bg-gray-100 dark:bg-gray-800 dark:text-blue-500' : 'hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300' }}">
-                Teachers
-            </a>
-        </li>
-        
-        <li class="me-2">
-            <a href="{{ route('admin.addTeacher') }}" 
-               class="inline-block p-4 rounded-t-lg 
-               {{ request()->routeIs('admin.addTeacher') ? 'text-blue-600 bg-gray-100 dark:bg-gray-800 dark:text-blue-500' : 'hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300' }}">
-                Add Teacher
-            </a>
-        </li>
-    
-      
-    </ul> --}} 
-    <a href="{{ route('admin.addTeacher') }}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"><i class="fa-solid fa-plus"></i> Add teacher</a>
+<div class="flex justify-center flex-col mt-12 items-start w-full h-screen"> 
+    <a href="{{ route('admin.addTeacher') }}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+        <i class="fa-solid fa-plus"></i> Add teacher
+    </a>
 
     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-        
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
-                <th scope="col" class="px-6 py-3">
-                    Student name
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    email
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Phone
-                </th>
-               
-                <th scope="col" class="px-6 py-3">
-                   Actions
-                </th>
+                <th scope="col" class="px-6 py-3">Student name</th>
+                <th scope="col" class="px-6 py-3">Email</th>
+                <th scope="col" class="px-6 py-3">Phone</th>
+                <th scope="col" class="px-6 py-3">Actions</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($users as $user)
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    {{$user->name}}
+                    {{ $user->name }}
                 </th>
-                <td class="px-6 py-4">
-                    {{$user->email}}
-                </td>
-                <td class="px-6 py-4">
-                    {{$user->phone}}
-                </td>
-                
-                <td class=" py-4 text-right flex justify-evenly">
-                    {{-- <a href="" class="font-medium text-red-600 hover:underline">Delete</a> --}}
-                    <form action="{{route("user.destroy",$user->id)}}" method="POST"> @csrf @method("DELETE")
-                        <button type="submit" class="font-medium text-red-600 hover:underline" onclick="return confirm('Are you sure you want to delete the teacher?')"  >Delete</button></form>
-                    <a href="{{route("admin.editTeacher",$user->id)}}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                <td class="px-6 py-4">{{ $user->email }}</td>
+                <td class="px-6 py-4">{{ $user->phone }}</td>
+                <td class="py-4 text-right flex justify-evenly">
+                    <button type="button" 
+                            data-modal-target="deleteModal" 
+                            data-modal-toggle="deleteModal" 
+                            data-delete-url="{{ route('user.destroy', $user->id) }}" 
+                            class="font-medium text-red-600 hover:underline">
+                        Delete
+                    </button>
+                    <a href="{{ route('admin.editTeacher', $user->id) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
                 </td>
             </tr>
-   
             @endforeach
         </tbody>
     </table>
 </div>
 
+<!-- Delete Confirmation Modal -->
+<div id="deleteModal" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative p-4 w-full max-w-md max-h-full">
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <!-- Modal header -->
+            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Delete Teacher</h3>
+                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="deleteModal">
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                    </svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+            </div>
+            <!-- Modal body -->
+            <div class="p-4 md:p-5">
+                <p class="text-gray-500 dark:text-gray-400">Are you sure you want to delete this teacher?</p>
+            </div>
+            <!-- Modal footer -->
+            <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+                <form id="deleteForm" method="POST" action="">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-900">Yes, delete</button>
+                </form>
+                <button data-modal-hide="deleteModal" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">No, cancel</button>
+            </div>
+        </div>
     </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const deleteButtons = document.querySelectorAll('[data-modal-toggle="deleteModal"]');
+        const deleteForm = document.getElementById('deleteForm');
+
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const deleteUrl = button.getAttribute('data-delete-url');
+                deleteForm.setAttribute('action', deleteUrl);
+            });
+        });
+    });
+</script>
 @endsection

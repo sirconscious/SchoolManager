@@ -12,7 +12,11 @@
     @vite('resources/css/app.css')
     <script src="https://cdn.jsdelivr.net/npm/flowbite@1.4.2/dist/flowbite.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts@3.46.0/dist/apexcharts.min.js"></script>
+<!-- Flowbite CSS -->
+{{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" /> --}}
 
+<!-- Flowbite JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
     <title>Document</title>
 </head>
 <body>

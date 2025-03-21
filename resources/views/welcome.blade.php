@@ -9,6 +9,8 @@
     <title>Document</title>
 </head>
 <body>
-        <h1 class="text-3xl text-red-500 te">Test</h1>
+        <h1 class="text-3xl text-red-500 te">
+            welcome
+        </h1>
 </body>
 </html>

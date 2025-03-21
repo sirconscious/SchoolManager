@@ -65,6 +65,7 @@
                   <li>
                     {{-- <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Earnings</a> --}}
                   </li>
+                  
                   <li>
                     <a href="{{route('user.logout')}}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Sign out</a>
                   </li>
@@ -124,6 +125,14 @@
                   <span class="flex-1 ms-3 whitespace-nowrap">Annocements</span>
               </a>
            </li>
+           <li>
+            <a href="{{ route('admin.CoursesListe') }}" 
+            class="flex items-center p-2  rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group
+                      {{ request()->routeIs('admin.CoursesListe') || request()->routeIs('exame.index') ? 'bg-gray-700 text-white dark:hover:bg-gray-700' : 'hover:bg-gray-100 dark:hover:bg-gray-700' }} group">
+                      <i class="fa-solid fa-book"></i>
+                <span class="flex-1 ms-3 whitespace-nowrap">Courses</span>
+           </a>
+        </li>
            <li>
             <a href="{{ route('user.logout') }}" 
             class="flex items-center p-2  rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group

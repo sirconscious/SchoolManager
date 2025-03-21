@@ -13,7 +13,7 @@
     
 {{-- The navBar --}}
 
-<nav class="bg-white border-gray-200 dark:bg-gray-900">
+{{-- <nav class="bg-white border-gray-200 dark:bg-gray-900">
     <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4">
         <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
             <img src="https://flowbite.com/docs/images/logo.svg" class="h-8" alt="Flowbite Logo" />
@@ -23,9 +23,12 @@
             <a href="#" class="text-sm  text-blue-600 dark:text-blue-500 hover:underline">Login</a>
         </div>
     </div>
-</nav>
-<div class="h-[400px] w-full flex justify-center items-center">
-
+</nav> --}}
+<div class=" w-full flex gap-4 h-screen justify-center flex-col items-center">
+    <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse ">
+        <img src="https://flowbite.com/docs/images/logo.svg" class="h-15" alt="Flowbite Logo" />
+        <span class="self-center text-5xl font-semibold whitespace-nowrap dark:text-white">SchoolManger</span>
+    </a>
     @yield('content') 
 </div>
 

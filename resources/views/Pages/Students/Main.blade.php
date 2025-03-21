@@ -83,26 +83,26 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-2 mt-2" id="notes">
                 <figure class="flex flex-col items-center justify-center p-4 text-center bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 w-full max-w-xs mx-auto">
                     <blockquote class="max-w-xs mx-auto mb-2 text-gray-500 dark:text-gray-400">
-                        <h3 class="text-base font-semibold text-gray-900 dark:text-white">here goes the note</h3>
-                        <p class="my-2 text-sm">here the name</p>
+                        <h3 class="text-base font-semibold text-gray-900 dark:text-white"></h3>
+                        <p class="my-2 text-sm"></p>
                     </blockquote>
                 </figure>
                 <figure class="flex flex-col items-center justify-center p-4 text-center bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 w-full max-w-xs mx-auto">
                     <blockquote class="max-w-xs mx-auto mb-2 text-gray-500 dark:text-gray-400">
-                        <h3 class="text-base font-semibold text-gray-900 dark:text-white">Solid foundation for any project</h3>
-                        <p class="my-2 text-sm">Designing with Figma components that can be easily translated to the utility classes of Tailwind CSS is a huge timesaver!"</p>
+                        <h3 class="text-base font-semibold text-gray-900 dark:text-white"></h3>
+                        <p class="my-2 text-sm"></p>
                     </blockquote>
                 </figure>
                 <figure class="flex flex-col items-center justify-center p-4 text-center bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 w-full max-w-xs mx-auto">
                     <blockquote class="max-w-xs mx-auto mb-2 text-gray-500 dark:text-gray-400">
-                        <h3 class="text-base font-semibold text-gray-900 dark:text-white">Mindblowing workflow</h3>
-                        <p class="my-2 text-sm">Aesthetically, the well-designed components are beautiful and will undoubtedly level up your next application."</p>
+                        <h3 class="text-base font-semibold text-gray-900 dark:text-white"></h3>
+                        <p class="my-2 text-sm"></p>
                     </blockquote>
                 </figure>
                 <figure class="flex flex-col items-center justify-center p-4 text-center bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 w-full max-w-xs mx-auto">
                     <blockquote class="max-w-xs mx-auto mb-2 text-gray-500 dark:text-gray-400">
-                        <h3 class="text-base font-semibold text-gray-900 dark:text-white">Efficient Collaborating</h3>
-                        <p class="my-2 text-sm">You have many examples that can be used to create a fast prototype for your team."</p>
+                        <h3 class="text-base font-semibold text-gray-900 dark:text-white"></h3>
+                        <p class="my-2 text-sm"></p>
                     </blockquote>
                 </figure>
             </div>

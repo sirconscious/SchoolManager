@@ -11,6 +11,7 @@ use App\Http\Controllers\StudentsController;
 use App\Http\Controllers\TeachersController;
 use App\Http\Controllers\TodolistController;
 use App\Http\Controllers\UserController;
+use App\Models\Courses;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
 
@@ -67,10 +68,10 @@ Route::middleware('auth')->group(function () {
     });
 
     // Teacher routes (grouped under 'teacher' middleware)
-    Route::middleware('canViewCoursAndExames')->group(function () {        
+    // Route::middleware('canViewCoursAndExames')->group(function () {        
         Route::get("coursesListe", [AdminController::class, "CoursesListe"])->name("admin.CoursesListe");
         Route::get("examesListe", [ExamesController::class, "index"])->name("exame.index");
-    });
+    // });
 
 
     Route::middleware('teacher')->group(function () {
@@ -105,7 +106,18 @@ Route::middleware('auth')->group(function () {
         Route::get('emploieS', [StudentsController::class, 'emploie'])->name("student.emploie");
         Route::get('AnnonceS', [StudentsController::class, 'Annocements'])->name("student.Annonce");
     });
+    
 });
+
+Route::get('/download/{courses}', function ($courses) {
+   $filenam =   Courses::find($courses)->filename ;
+    $path = storage_path('app/public/' . $filenam);
+    // dd($path) ;
+    if (!file_exists($path)) {
+        abort(404, 'File not found.');
+    }
+    return response()->download($path);
+})->name('file.download');
 //apis
 Route::get('/get-students/{group}', function ($group) {
     $students = User::where('role', 'student')->where('group', $group)->get();

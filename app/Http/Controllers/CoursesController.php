@@ -31,7 +31,9 @@ class CoursesController extends Controller
         $formFields = $request->validate([
             "name" => "required",
             "description" => "required",
+            'filename' => "required"
         ]) ; 
+            $formFields['filename'] = $request->file('filename')->store('Courses', 'public');
         Courses::create($formFields) ;
         return to_route('admin.CoursesListe')->with('success', 'Course added successfully.');
     }
@@ -60,7 +62,12 @@ class CoursesController extends Controller
         $formFields = $request->validate([
             "name" => "required",
             "description" => "required",
+
         ]) ;
+        if ($request->hasFile("filename")) {
+            $formFields['filename'] = $request->file('filename')->store('Courses', 'public');
+
+        }
         $courses->update($formFields) ;
         return to_route('admin.CoursesListe')->with('success', 'Course updated successfully.');
     }
