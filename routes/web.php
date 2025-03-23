@@ -12,6 +12,7 @@ use App\Http\Controllers\TeachersController;
 use App\Http\Controllers\TodolistController;
 use App\Http\Controllers\UserController;
 use App\Models\Courses;
+use App\Models\exam_records;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
 
@@ -127,4 +128,14 @@ Route::get('/get-students/{group}', function ($group) {
 Route::get('/get-studentByName/{name}', function ($name) {
     $students = User::where('name', 'like', "%$name%")->where('role', 'student')->get();
     return Response::json($students, 200, ['Access-Control-Allow-Origin' => '*']);
+});
+
+Route::get('/get-notes/{student:id}/{exame}', function ($student , $exame) {
+    $notes = exam_records::select('exam_records.*', 'courses.name as course_name')
+        ->join('exames', 'exames_id', '=', 'exames.id')
+        ->join('courses', 'courses_id', '=', 'courses.id')
+        ->where('users_id', $student)
+        ->where('courses.name', $exame)
+        ->get();
+    return Response::json($notes, 200, ['Access-Control-Allow-Origin' => '*']);
 });

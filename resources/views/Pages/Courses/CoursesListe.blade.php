@@ -64,7 +64,12 @@
                 </th>
 
                 <th scope="col" class="px-6 py-3">
-                   Dmonload 
+                    
+                   @if (auth()->user()->role == "teacher")
+                       Actions
+                   @else
+                       Dmonload
+                   @endif 
                 </th>
             </tr>
         </thead>

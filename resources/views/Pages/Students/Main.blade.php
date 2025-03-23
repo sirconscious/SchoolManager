@@ -115,7 +115,9 @@
         
     </div>
     
-</div><script>
+</div>
+
+<script>
 
 
 let pre = [18.2, 16, 12, 16];
@@ -157,7 +159,7 @@ const Maxes = async () => {
         const response = await  fetch('/recordsStats/${idUser}') // Fetch data from the API
         const data = await response.json(); // Parse the JSON response
         const notes = document.getElementById("notes"); // Get the notes container
-        
+        console.log("dd",data);
         // Clear existing content (optional, if you want to refresh the grid)
         notes.innerHTML = '';
 
