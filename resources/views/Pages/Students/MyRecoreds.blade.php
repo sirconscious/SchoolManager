@@ -1,6 +1,7 @@
 @extends('Layouts.StudentsLayout')
 @section('content')
 <div class="flex justify-center flex-col mt-12 items-start w-full h-screen">
+    <h1 class="text-3xl">Your Exam recoreds: </h1>
     <div class="relative overflow-x-auto w-full max-h-[500px] overflow-y-auto shadow-md rounded-lg">
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 sticky top-0">

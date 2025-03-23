@@ -118,8 +118,8 @@
                     @endif
                     @if (auth()->user()->role !== "teacher")
                     
-                        <a href="{{ route('file.download', $course->id) }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                            <i class="fa-solid fa-download text-2xl mr-10"  ></i>
+                        <a href="{{ route('file.download', $course->id) }}" class="block px-4 py-2">
+                            <i class="fa-solid fa-download text-2xl mr-10  dark:hover:text-white"  ></i>
                         </a>
                     
                     @endif

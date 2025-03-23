@@ -1,6 +1,11 @@
 @extends('Layouts.AdminLayout') 
 @section('content')
-<div class="flex justify-center items-center h-screen relative ">
+<div class="flex flex-col -mt-12 gap-5 justify-center items-center h-screen relative ">
+    <div class="w-full flex  ">
+        <a href="{{ route('anonnce.create') }}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+            <i class="fa-solid fa-plus"></i> Add Anoncment
+        </a>
+    </div>
     <div class="grid grid-cols-3 gap-4">
       
    @foreach ($anoncmentsListe as $anonce)
@@ -76,12 +81,12 @@
     </figure>
 
    @endforeach     
-<a href="{{route("anonnce.create")}}">
+{{-- <a href="{{route("anonnce.create")}}">
 
     <div class="px-4 py-4 absolute bottom-8 right-5 cursor-pointer rounded-full bg-gradient-to-r from-blue-500 to-green-500 shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out">
         <i class="fa-solid fa-plus text-2xl text-white"></i>
     </div>
-</a>
+</a> --}}
     </div>
 </div>
 @endsection

@@ -1,5 +1,15 @@
-@extends('Layouts.TeacherLayout') 
-@section('content')
+@php
+    $layout = 'Layouts.StudentsLayout'; // Default layout
+    if (auth()->check()) {
+        if (auth()->user()->role == "admin") {
+            $layout = 'Layouts.AdminLayout';
+        } elseif (auth()->user()->role == "teacher") {
+            $layout = 'Layouts.TeacherLayout';
+        }
+    }
+@endphp
+
+@extends($layout)@section('content')
 <div class="flex justify-end w-full items-start mt-15  relative "> 
     
 
@@ -53,9 +63,12 @@
                 <th scope="col" class="px-6 py-3">
                    Duree 
                 </th>
+                @if (auth()->user()->role == "teacher")
                 <th scope="col" class="px-6 py-3">
-                   Action 
-                </th>
+                    Action 
+                 </th>             </a>
+                @endif
+                
             </tr>
         </thead>
         <tbody>
@@ -76,12 +89,14 @@
                 <td class="px-6 py-4">
                     {{$exame->duree}}
                 </td> 
-              
-                  <td class=" py-4 text-right flex justify-evenly">
+                @if (auth()->user()->role == "teacher")
+                <td class=" py-4 text-right flex justify-evenly">
                     <form action="{{route("exame.destroy",$exame->id)}}" method="POST"> @csrf @method("DELETE")
                         <button type="submit" class="font-medium text-red-600 hover:underline" onclick="return confirm('Are you sure you want to delete the exame?')"  >Delete</button></form>
                     <a href="{{route("exame.edit",$exame->id)}}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
                 </td> 
+                @endif
+                
             </tr>
    
             @endforeach 
