@@ -1,6 +1,6 @@
-@extends('Layouts.AdminLayout')
+@extends('Layouts.TeacherLayout')
 @section('content')
-<div class="flex justify-center items-center h-screen ">
+<div class="flex justify-center mt-2 items-center h-screen ">
     
 
 <form class="max-w-sm mx-auto w-full" action="{{route('course.update' , $courses)}}" enctype="multipart/form-data" method="POST">
@@ -15,6 +15,11 @@
 <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
 <textarea id="descrition" rows="4" name="description"  class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your The description here...">{{$courses->description}}</textarea>
 
+<label for="coef" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Coefition :</label>
+<input type="number" id="coef" name="coef" value="{{$courses->coef->coef}}" aria-describedby="helper-text-explanation" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  required />
+
+
+<label for="filename">File name: </label>
 <div class="flex items-center justify-center w-full">
   <label for="filename" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
       <div class="flex flex-col items-center justify-center pt-5 pb-6">

@@ -26,9 +26,8 @@ use App\Models\User;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::redirect('/', '/login');
 
 // Public routes (no auth middleware)
 Route::get('login', [UserController::class, 'loginShow'])->name("user.login.show");

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Coef;
 use App\Models\Courses;
 use Illuminate\Http\Request;
 
@@ -31,10 +32,16 @@ class CoursesController extends Controller
         $formFields = $request->validate([
             "name" => "required",
             "description" => "required",
-            'filename' => "required"
-        ]) ; 
+            'filename' => "required" ,
+            
+        ]) ;
+         
             $formFields['filename'] = $request->file('filename')->store('Courses', 'public');
-        Courses::create($formFields) ;
+        $newCourse = Courses::create($formFields) ;
+        $Coef = Coef::create([
+            "courses_id" => $newCourse->id ,
+            "coef"=> $request->coef 
+        ]) ;
         return to_route('admin.CoursesListe')->with('success', 'Course added successfully.');
     }
 
@@ -69,6 +76,7 @@ class CoursesController extends Controller
 
         }
         $courses->update($formFields) ;
+        Coef::where('courses_id', $courses->id)->update(['coef' => $request->coef]);
         return to_route('admin.CoursesListe')->with('success', 'Course updated successfully.');
     }
 
@@ -77,6 +85,8 @@ class CoursesController extends Controller
      */
     public function destroy(Courses $courses)
     {
+        Coef::where('courses_id', $courses->id)->delete();
+
         $courses->delete(); 
         return back()->with('success', 'Course deleted successfully.');
     }

@@ -12,5 +12,8 @@ class Courses extends Model
         "name",
         "description" ,
         "filename"
-    ] ;
+    ] ; 
+    public function coef(){
+        return $this->hasOne(Coef::class , "courses_id" , "id") ;
+    }
 }

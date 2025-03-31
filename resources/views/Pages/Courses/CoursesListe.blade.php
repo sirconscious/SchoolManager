@@ -60,6 +60,9 @@
                     description
                 </th>
                 <th scope="col" class="px-6 py-3">
+                    Coef
+                </th>
+                <th scope="col" class="px-6 py-3">
                     Created At
                 </th>
 
@@ -81,6 +84,9 @@
                 </th>
                 <td class="px-6 py-4">
                     {{$course->description}}
+                </td>
+                <td class="px-6  py-4">
+                    {{$course->coef->coef}}
                 </td>
                 <td class="px-6 py-4">
                     {{$course->created_at}}

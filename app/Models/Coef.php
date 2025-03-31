@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Coef extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        "coef",
+        "courses_id" ,
+    ] ;
 }
