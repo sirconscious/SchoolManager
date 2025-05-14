@@ -15,12 +15,10 @@ class EnsureUserIsAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // Check if the user is authenticated and has the role of "admin"
         if (auth()->check() && auth()->user()->role === 'admin') {
-            return $next($request); // Allow the request to proceed
+            return $next($request); 
         }
 
-        // If the user is not an admin, redirect them or return an error
         return redirect('/login')->with('error', 'You do not have permission to access this page.');
     }
 }

@@ -33,13 +33,12 @@ Route::redirect('/', '/login');
 Route::get('login', [UserController::class, 'loginShow'])->name("user.login.show");
 Route::post('login', [UserController::class, 'login'])->name("user.login");
 
-// Group all routes under the 'auth' middleware
 Route::middleware('auth')->group(function () {
     // User routes
     Route::resource("user", UserController::class);
     Route::get('logout', [UserController::class, 'logout'])->name("user.logout");
 
-    // Admin routes (grouped under 'admin' middleware)
+    // Admin routes 
     Route::middleware('admin')->group(function () {
         Route::get('adminDashbored', [UserController::class, 'adminLayout'])->name("admin.dashbored");
         Route::post("addStudent", [AdminController::class, 'storeStudent'])->name("admin.addStudent");
@@ -71,6 +70,8 @@ Route::middleware('auth')->group(function () {
     // Route::middleware('canViewCoursAndExames')->group(function () {        
         Route::get("coursesListe", [AdminController::class, "CoursesListe"])->name("admin.CoursesListe");
         Route::get("examesListe", [ExamesController::class, "index"])->name("exame.index");
+        Route::get("studentRecored/{user}", [ExamRecordsController::class, 'show'])->name("record.show");
+
     // });
 
 

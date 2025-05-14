@@ -2,54 +2,94 @@
 @section('content')
 
 @if (session()->has('success'))
-    <div id="success-message" class="fixed top-8 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 flex items-center space-x-4 opacity-100 transition-opacity duration-500">
-        <!-- SVG Icon -->
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+    <div id="success-message" class="fixed top-8 left-1/2 transform -translate-x-1/2 bg-emerald-500 text-white px-6 py-4 rounded-xl shadow-lg z-50 flex items-center space-x-3 opacity-100 transition-all duration-500 border border-emerald-400">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4"></path>
         </svg>
-        
-        <!-- Message Text -->
-        <span>{{ session('success') }}</span>
+        <span class="font-medium">{{ session('success') }}</span>
     </div>
 @endif
 
+<!-- Header -->
+<div class="text-center mb-8">
+    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+        Welcome back
+    </h2>
+    <p class="text-sm text-gray-600 dark:text-gray-400">
+        Sign in to your account
+    </p>
+</div>
 
-<form class="max-w-sm w-full mx-auto" action="{{route('user.login')}}" method="POST">
+<!-- Form -->
+<form class="space-y-6" action="{{route('user.login')}}" method="POST">
     @csrf
-    <div class="mb-5">
-      <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
-      <input type="email" name="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@flowbite.com" required />
+    
+    <!-- Email Field -->
+    <div>
+        <label for="email" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+            Email address
+        </label>
+        <div class="relative">
+            <input type="email" name="email" required
+                   class="appearance-none relative block w-full px-4 py-3 border border-gray-300 dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white rounded-lg bg-gray-50 dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 text-sm"
+                   placeholder="Enter your email">
+        </div>
     </div>
-    <div class="mb-5">
-      <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your password</label>
-      <input type="password" name="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
-    </div>
-    {{-- <div class="flex items-start mb-5">
-      <div class="flex items-center h-5">
-        <input id="remember" type="checkbox" value="" class="w-4 h-4 border border-gray-300 rounded-sm bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800" required />
-      </div>
-      <label for="remember" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Remember me</label>
-    </div> --}}
-    <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
-    @if ($errors->has('login_error'))
-    <div class="alert alert-danger text-red-600">
-        {{ $errors->first('login_error') }}
-    </div>
-@endif
 
+    <!-- Password Field -->
+    <div>
+        <label for="password" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+            Password
+        </label>
+        <div class="relative">
+            <input type="password" name="password" required
+                   class="appearance-none relative block w-full px-4 py-3 border border-gray-300 dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white rounded-lg bg-gray-50 dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 text-sm"
+                   placeholder="Enter your password">
+        </div>
+    </div>
+
+    <!-- Submit Button -->
+    <div>
+        <button type="submit"
+                class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+            <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+                <svg class="h-5 w-5 text-blue-300 group-hover:text-blue-200 transition duration-200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
+                </svg>
+            </span>
+            Sign in
+        </button>
+    </div>
+
+    <!-- Error Message -->
+    @if ($errors->has('login_error'))
+        <div class="rounded-lg bg-red-50 dark:bg-red-900/20 p-4 border border-red-200 dark:border-red-800">
+            <div class="flex">
+                <svg class="w-5 h-5 text-red-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+                </svg>
+                <div class="ml-3">
+                    <p class="text-sm font-medium text-red-800 dark:text-red-200">
+                        {{ $errors->first('login_error') }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    @endif
 </form>
 
-  <script>
+<script>
+    // Auto-hide success message
     setTimeout(function() {
         const message = document.getElementById('success-message');
         if (message) {
-            message.style.transition = "opacity 0.5s ease";
-            message.style.opacity = 0; // Fade out
+            message.style.opacity = '0';
+            message.style.transform = 'translate(-50%, -20px)';
             setTimeout(function() {
-                message.remove(); // Remove the element after fade out
-            }, 500); // Wait for the fade-out to complete
+                message.remove();
+            }, 500);
         }
-    }, 2000); // Delay before starting to fade out (4 seconds)
+    }, 3000);
 </script>
 
 @endsection
