@@ -28,7 +28,9 @@ use App\Models\User;
 */
 
 Route::redirect('/', '/login');
-
+Route::get("/test" , function(){
+    return view("Emploie") ;
+}) ;
 // Public routes (no auth middleware)
 Route::get('login', [UserController::class, 'loginShow'])->name("user.login.show");
 Route::post('login', [UserController::class, 'login'])->name("user.login");
