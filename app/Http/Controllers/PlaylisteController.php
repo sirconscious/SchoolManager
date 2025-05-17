@@ -13,30 +13,43 @@ class PlaylisteController extends Controller
     {
         $playlists = Playlist::with('cours')->get();
         $courses = Courses::all();
-        return view("playliste", compact("playlists", "courses"));
+        
+        // Group playlists by course
+        $groupedPlaylists = $playlists->groupBy('cours.name');
+        
+        return view("playliste", compact("groupedPlaylists", "courses"));
     }
-
+    public function gestionplaylist(){ 
+        $videos = Playlist::all(); 
+        $cours = Courses::all() ;
+        return  view("GestionPlaylistes" , compact("videos" , "cours"));
+    }
     public function store(Request $request)
     {
-        $request->validate([
+        // dd($request->all()) ; 
+        
+        $validated =  $request->validate([
             'nom' => 'required|string|max:255',
-            'description' => 'required|string',
-            'video' => 'required|file|mimes:mp4,mov,avi,wmv|max:102400', // Max 100MB
-            'cours_id' => 'required|exists:courses,id'
+            'video_path' => 'required|file|mimes:mp4,mov,avi,wmv|max:102400', // Max 100MB
+            'cours_id' => 'required|exists:courses,id' , 
+            "level"=>"required|string" , 
+            "duration"=>"required"
         ]);
-
-        if ($request->hasFile('video')) {
-            $video = $request->file('video');
+        // dd($validated) ;
+        if ($request->hasFile('video_path')) {
+            $video = $request->file('video_path');
             $path = $video->store('videos', 'public');
             
             Playlist::create([
                 'nom' => $request->nom,
-                'description' => $request->description,
-                'video_path' => $path,
+                'description' => "",
+                'video_path' => $path, 
+                "level"=>$request->level , 
+                "duration" =>$request->duration ,
                 'cours_id' => $request->cours_id
             ]);
 
-            return redirect()->route('playlists.index')->with('success', 'Video added successfully');
+            return back()->with('success', 'Video added successfully');
         }
 
         return back()->with('error', 'No video file was uploaded');
@@ -50,7 +63,39 @@ class PlaylisteController extends Controller
         }
         
         $playlist->delete();
-        return redirect()->route('playlists.index')->with('success', 'Video deleted successfully');
+        return back()->with('success', 'Video added successfully');
+    }
+
+    public function update(Request $request, Playlist $playlist)
+    {
+        $validated = $request->validate([
+            'nom' => 'required|string|max:255',
+            'video_path' => 'nullable|file|mimes:mp4,mov,avi,wmv|max:102400', // Max 100MB
+            'cours_id' => 'required|exists:courses,id',
+            'level' => 'required|string',
+            'duration' => 'required'
+        ]);
+
+        $data = [
+            'nom' => $request->nom,
+            'cours_id' => $request->cours_id,
+            'level' => $request->level,
+            'duration' => $request->duration
+        ];
+
+        if ($request->hasFile('video_path')) {
+            // Delete old video file
+            if (Storage::disk('public')->exists($playlist->video_path)) {
+                Storage::disk('public')->delete($playlist->video_path);
+            }
+            
+            // Store new video file
+            $video = $request->file('video_path');
+            $data['video_path'] = $video->store('videos', 'public');
+        }
+
+        $playlist->update($data);
+        return back()->with('success', 'Video updated successfully');
     }
 
     public function stream($id)

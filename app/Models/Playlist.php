@@ -12,7 +12,9 @@ class Playlist extends Model
         "nom",
         "description",
         "cours_id",
-        "video_path"
+        "video_path" ,
+        "level" , 
+        "duration"
     ];
     public function cours()
     {

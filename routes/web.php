@@ -7,6 +7,7 @@ use App\Http\Controllers\CoursesController;
 use App\Http\Controllers\EmploieController;
 use App\Http\Controllers\ExamesController;
 use App\Http\Controllers\ExamRecordsController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\PlaylisteController;
 use App\Http\Controllers\StudentsController;
 use App\Http\Controllers\TeachersController;
@@ -40,18 +41,25 @@ Route::get("/test" , function(){
 Route::get('login', [UserController::class, 'loginShow'])->name("user.login.show");
 Route::post('login', [UserController::class, 'login'])->name("user.login");
 
-//qcm 
-Route::get('/qcm' , function(){
-    return view("QCM");
-})->name("qcm");
 
-//playlists 
-Route::get('/playlists', [PlaylisteController::class, 'index'])->name('playlists.index');
-Route::post('/playlists', [PlaylisteController::class, 'store'])->name('playlists.store');
-Route::delete('/playlists/{playlist}', [PlaylisteController::class, 'destroy'])->name('playlists.destroy');
-Route::get('/playlists/stream/{id}', [PlaylisteController::class, 'stream'])->name('playlists.stream');
 
 Route::middleware('auth')->group(function () {
+    //chat  
+    Route::get("chat",  [MessageController::class, "index"])->name("chat.chat");
+    Route::get('/messages', [MessageController::class, 'api'])->name('messages.api');
+    Route::post('/messages', [MessageController::class, 'store'])->name('messages.store');
+
+    //qcm 
+    Route::get('/qcm', function () {
+        return view("QCM");
+    })->name("qcm");
+
+    //playlists 
+    Route::get('/playlists', [PlaylisteController::class, 'index'])->name('playlists.index');
+    Route::post('/playlists', [PlaylisteController::class, 'store'])->name('playlists.store');
+    Route::delete('/playlists/{playlist}', [PlaylisteController::class, 'destroy'])->name('playlists.destroy');
+    Route::get('/playlists/stream/{id}', [PlaylisteController::class, 'stream'])->name('playlists.stream');
+
     // User routes
     Route::resource("user", UserController::class);
     Route::get('logout', [UserController::class, 'logout'])->name("user.logout");
@@ -59,6 +67,8 @@ Route::middleware('auth')->group(function () {
 
     // Admin routes 
     Route::middleware('admin')->group(function () {
+        Route::get("/gestionplaylist", [PlaylisteController::class, "gestionplaylist"])->name("videos.gestion");
+
         Route::get('adminDashbored', [UserController::class, 'adminLayout'])->name("admin.dashbored");
         Route::post("addStudent", [AdminController::class, 'storeStudent'])->name("admin.addStudent");
         Route::get('studentList', [AdminController::class, 'studentList'])->name("admin.studentList");
@@ -134,9 +144,12 @@ Route::middleware('auth')->group(function () {
     
     Route::get('/playlists', [PlaylisteController::class, 'index'])->name('playlists.index');
     Route::post('/playlists', [PlaylisteController::class, 'store'])->name('playlists.store');
+    Route::put('/playlists/{playlist}', [PlaylisteController::class, 'update'])->name('playlists.update');
     Route::delete('/playlists/{playlist}', [PlaylisteController::class, 'destroy'])->name('playlists.destroy');
     Route::get('/playlists/stream/{id}', [PlaylisteController::class, 'stream'])->name('playlists.stream');
+
 });
+// Message Routes (for polling and sending)
 
 Route::get('/download/{courses}', function ($courses) {
    $filenam =   Courses::find($courses)->filename ;
@@ -166,4 +179,12 @@ Route::get('/get-notes/{student:id}/{exame}', function ($student , $exame) {
         ->where('courses.name', $exame)
         ->get();
     return Response::json($notes, 200, ['Access-Control-Allow-Origin' => '*']);
+});
+
+Route::middleware(['auth'])->group(function () {
+    // Playlist Management Routes
+    Route::get('/playlists', [PlaylisteController::class, 'index'])->name('playlists.index');
+    Route::post('/playlists', [PlaylisteController::class, 'store'])->name('playlists.store');
+    Route::put('/playlists/{playlist}', [PlaylisteController::class, 'update'])->name('playlists.update');
+    Route::delete('/playlists/{playlist}', [PlaylisteController::class, 'destroy'])->name('playlists.destroy');
 });

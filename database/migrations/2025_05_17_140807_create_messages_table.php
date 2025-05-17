@@ -11,15 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('playlists', function (Blueprint $table) {
+        Schema::create('messages', function (Blueprint $table) {
             $table->id(); 
-            $table->string('nom') ;
-            $table->text("description") ; 
-            $table->string("video_path") ;
-            $table->string("level");
-            $table->unsignedBigInteger("cours_id") ;
-
-            $table->foreign("cours_id")->references("id")->on("courses");
+            $table->text("body") ; 
+            $table->unsignedBigInteger("user_id") ; 
+            $table->string("groupe");
+            $table->foreign("user_id")->references("id")->on("users");
             $table->timestamps();
         });
     }
@@ -29,7 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('playlists'); 
-        
+        Schema::dropIfExists('messages');
     }
 };

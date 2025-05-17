@@ -134,11 +134,27 @@
            </a>
         </li>
         <li>
+            <a href="{{ route('playlists.index') }}" 
+            class="flex items-center p-2  rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group
+                      {{ request()->routeIs('playlists.index') ? 'bg-gray-700 text-white dark:hover:bg-gray-700' : 'hover:bg-gray-100 dark:hover:bg-gray-700' }} group">
+                      <i class="fa-solid fa-video"></i>
+                <span class="flex-1 ms-3 whitespace-nowrap">Course Videos</span>
+           </a>
+        </li>
+        <li>
             <a href="{{ route('qcm') }}" 
             class="flex items-center p-2  rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group
                       {{ request()->routeIs('qcm') ? 'bg-gray-700 text-white dark:hover:bg-gray-700' : 'hover:bg-gray-100 dark:hover:bg-gray-700' }} group">
                       <i class="fa-solid fa-question-circle"></i>
                 <span class="flex-1 ms-3 whitespace-nowrap">QCM Quiz</span>
+           </a>
+        </li>
+        <li>
+            <a href="{{ route('chat.chat') }}" 
+            class="flex items-center p-2  rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group
+                      {{ request()->routeIs('chat.chat') ? 'bg-gray-700 text-white dark:hover:bg-gray-700' : 'hover:bg-gray-100 dark:hover:bg-gray-700' }} group">
+                      <i class="fa-solid fa-comments"></i>
+                <span class="flex-1 ms-3 whitespace-nowrap">Group chat</span>
            </a>
         </li>
            <li>

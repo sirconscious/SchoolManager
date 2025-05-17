@@ -145,6 +145,14 @@
                 <span class="flex-1 ms-3 whitespace-nowrap">Courses</span>
            </a>
         </li>
+        <li>
+            <a href="{{ route('videos.gestion') }}" 
+            class="flex items-center p-2 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group
+                      {{ request()->routeIs('videos.gestion') ? 'bg-gray-700 text-white dark:hover:bg-gray-700' : 'hover:bg-gray-100 dark:hover:bg-gray-700' }} group">
+                      <i class="fa-solid fa-video"></i>
+                <span class="flex-1 ms-3 whitespace-nowrap">Video Management</span>
+           </a>
+        </li>
            <li>
                <a href="{{ route('user.logout') }}" 
                class="flex items-center p-2  rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group
