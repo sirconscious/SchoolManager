@@ -108,9 +108,9 @@
          
            <li>
               {{-- <a href="{{route('admin.addTeacher')}}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"> --}}
-               <a href="{{ route('teacher.emploie') }}" 
+               <a href="{{ route('emploie.view') }}" 
                class="flex items-center p-2  rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group
-                         {{ request()->routeIs('teacher.emploie') ? 'bg-gray-700 text-white dark:hover:bg-gray-700' : 'hover:bg-gray-100 dark:hover:bg-gray-700' }} group">
+                         {{ request()->routeIs('emploie.view') ? 'bg-gray-700 text-white dark:hover:bg-gray-700' : 'hover:bg-gray-100 dark:hover:bg-gray-700' }} group">
                          <i class="fa-solid fa-calendar-days"></i> 
                <span class="flex-1 ms-3 whitespace-nowrap">Emploie</span>
               </a>

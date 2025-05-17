@@ -15,5 +15,8 @@ class Courses extends Model
     ] ; 
     public function coef(){
         return $this->hasOne(Coef::class , "courses_id" , "id") ;
+    } 
+    public function playlists(){
+        return $this->hasMany(Playlist::class) ;
     }
 }

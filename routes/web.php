@@ -7,6 +7,7 @@ use App\Http\Controllers\CoursesController;
 use App\Http\Controllers\EmploieController;
 use App\Http\Controllers\ExamesController;
 use App\Http\Controllers\ExamRecordsController;
+use App\Http\Controllers\PlaylisteController;
 use App\Http\Controllers\StudentsController;
 use App\Http\Controllers\TeachersController;
 use App\Http\Controllers\TodolistController;
@@ -14,6 +15,7 @@ use App\Http\Controllers\UserController;
 use App\Models\Courses;
 use App\Models\exam_records;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Response;
 use App\Models\User;
 
 /*
@@ -31,14 +33,29 @@ Route::redirect('/', '/login');
 Route::get("/test" , function(){
     return view("Emploie") ;
 }) ;
+// routes/web.php
+// Route::get('/emploie2', [App\Http\Controllers\EmploieController::class, 'index'])->name('emploie.index');
+// Route::post('/emploie/store', [App\Http\Controllers\EmploieController::class, 'store'])->name('emploie.store');
 // Public routes (no auth middleware)
 Route::get('login', [UserController::class, 'loginShow'])->name("user.login.show");
 Route::post('login', [UserController::class, 'login'])->name("user.login");
+
+//qcm 
+Route::get('/qcm' , function(){
+    return view("QCM");
+})->name("qcm");
+
+//playlists 
+Route::get('/playlists', [PlaylisteController::class, 'index'])->name('playlists.index');
+Route::post('/playlists', [PlaylisteController::class, 'store'])->name('playlists.store');
+Route::delete('/playlists/{playlist}', [PlaylisteController::class, 'destroy'])->name('playlists.destroy');
+Route::get('/playlists/stream/{id}', [PlaylisteController::class, 'stream'])->name('playlists.stream');
 
 Route::middleware('auth')->group(function () {
     // User routes
     Route::resource("user", UserController::class);
     Route::get('logout', [UserController::class, 'logout'])->name("user.logout");
+    Route::get('/mon-emploie', [App\Http\Controllers\EmploieController::class, 'mySchedule'])->name('emploie.my');
 
     // Admin routes 
     Route::middleware('admin')->group(function () {
@@ -66,6 +83,9 @@ Route::middleware('auth')->group(function () {
         Route::delete("deleteAnnoncements/{annoce}", [AnnoceController::class, 'destroy'])->name("anonnce.destroy");
         Route::get("editAnnoncements/{annoce}", [AnnoceController::class, 'edit'])->name("anonnce.edit");
         Route::put("updateAnnoncements/{annoce}", [AnnoceController::class, 'update'])->name("anonnce.update");
+
+        Route::get('/emploie2', [App\Http\Controllers\EmploieController::class, 'index'])->name('emploie.index');
+        Route::post('/emploie/store', [App\Http\Controllers\EmploieController::class, 'store'])->name('emploie.store');
     });
 
     // Teacher routes (grouped under 'teacher' middleware)
@@ -99,6 +119,8 @@ Route::middleware('auth')->group(function () {
 
         Route::get("Teacheremploie", [EmploieController::class, 'index'])->name("teacher.emploie");
         Route::get("TeacherAnnonce", [AnnoceController::class, 'index'])->name("teacher.anonnce");
+
+        Route::get('/voir-emploie', [App\Http\Controllers\EmploieController::class, 'view'])->name('emploie.view');
     });
 
     // Student routes (grouped under 'student' middleware)
@@ -110,6 +132,10 @@ Route::middleware('auth')->group(function () {
         Route::get('AnnonceS', [StudentsController::class, 'Annocements'])->name("student.Annonce");
     });
     
+    Route::get('/playlists', [PlaylisteController::class, 'index'])->name('playlists.index');
+    Route::post('/playlists', [PlaylisteController::class, 'store'])->name('playlists.store');
+    Route::delete('/playlists/{playlist}', [PlaylisteController::class, 'destroy'])->name('playlists.destroy');
+    Route::get('/playlists/stream/{id}', [PlaylisteController::class, 'stream'])->name('playlists.stream');
 });
 
 Route::get('/download/{courses}', function ($courses) {
