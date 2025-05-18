@@ -41,11 +41,11 @@
                 <div class="relative bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border border-white/20 dark:border-gray-700/50 transform transition-all duration-500 hover:scale-105 hover:rotate-1">
                     <a href="http://localhost:5174/" class="flex flex-col items-center space-y-4">
                         <div class="relative">
-                            <img src="https://flowbite.com/docs/images/logo.svg" class="h-16 w-16 drop-shadow-lg" alt="Flowbite Logo" />
+            <div class="h-10 w-10 bg-[rgb(0_240_255)] text-indigo-950 rounded-md flex items-center justify-center mr-3" style="transform: none;"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-atom h-6 w-6 text-dark-900"><circle cx="12" cy="12" r="1"></circle><path d="M20.2 20.2c2.04-2.03.02-7.36-4.5-11.9-4.54-4.52-9.87-6.54-11.9-4.5-2.04 2.03-.02 7.36 4.5 11.9 4.54 4.52 9.87 6.54 11.9 4.5Z"></path><path d="M15.7 15.7c4.52-4.54 6.54-9.87 4.5-11.9-2.03-2.04-7.36-.02-11.9 4.5-4.52 4.54-6.54 9.87-4.5 11.9 2.03 2.04 7.36.02 11.9-4.5Z"></path></svg></div>
                             <div class="absolute -inset-2 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full opacity-20 blur animate-pulse"></div>
                         </div>
                         <h1 class="text-4xl md:text-5xl font-black bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent dark:from-blue-400 dark:via-purple-400 dark:to-indigo-400 tracking-tight">
-                            SchoolManager
+                            SCHOOL ACADEMY
                         </h1>
                         <p class="text-sm text-gray-600 dark:text-gray-400 font-medium tracking-wide">
                             Modern Education Management System
